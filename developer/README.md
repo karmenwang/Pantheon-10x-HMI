@@ -1,47 +1,38 @@
-# Pantheon 10x Web UI
-## Installation guide
-Once you have a working build of the duet board (running at least RepRap 2.0.2)
-- Download the files within the web_ui folder of the repo
-- Replace all files in /www folder with the files in the web_ui folder
+# Duet Web Control
 
-## First setup guide
-- If on windows download the following [package](https://nodejs.org/en/download/)
-- If on linux run the following 
+Duet Web Control is a fully-responsive HTML5-based web interface for RepRapFirmware which utilizes the Bootstrap framework, JQuery and a few other libraries to allow easy control of Duet-based 3D printer electronics.
 
-`sudo apt-get update`
+It is designed to communicate with RepRapFirmware using WebSockets and RESTful HTTP requests. One goal of the core application is to keep things compact, so a good loading speed can be achieved even on slow networks. Another one is to communicate to the firmware using only AJAX calls, which either return JSON objects, plain texts or binary blobs.
 
-`sudo apt-get install nodejs`
+Duet Web Control is free software; it is licensed under the terms of the GNU Public License v3.
 
-`sudo apt-get install npm`
+## Supported electronics
 
-## Developer guide
-Edit any files within the developper directory of the repo to change the Duet Web Control 
-### To see changes
-- Go into local directory of /developper
-- Run the following command
+At this time the following platforms are supported:
 
-`npm run serve`
+* Duet Maestro
+* Duet 2 WiFi
+* Duet 2 Ethernet
+* Duet 3
 
-- Enter the provided localhost url into your preferred browser
-### To upload changes
-- Go into local directory of /developper
-- Run the following command
+## Build variants
 
-`npm run build`
+There are two variants available:
 
-- Find the resulting files in the /developper/dist directory
-- Replace all files in your working /www directory with said files (not including the zips)
+* DuetWebControl-SD for Duet Maestro and Duet 2 series
+* DuetWebControl-SBC for Duet 3
 
-### OR
-- Go into local directory of /developper
-- Run the following command
+## Project setup
+```
+npm install
+```
 
-`npm run build`
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-- Find the resulting files in the /developper/dist directory
-    - SD for duet 2
-    - SBC for duet 3
-- Replace all files in your working /www with the files in the dwc1 folder of the directory
-- Plug SD card into duet and launch DWC 
-- Go into settings and upload the appropiate zip file created by building project
-
+### Compiles and minifies for production
+```
+npm run build
+```

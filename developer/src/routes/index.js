@@ -8,7 +8,7 @@ import Page404 from './Page404.vue'
 import Control from './Control'
 import Job from './Job'
 import Files from './Files'
-
+import Settings from './Settings'
 
 Vue.use(VueRouter)
 
@@ -28,7 +28,7 @@ export const Routing = [
 			// Console
 			{
 				icon: 'mdi-code-tags',
-				caption: 'Notifications',
+				caption: 'menu.control.console',
 				path: '/Console',
 				component: Control.Console
 			},
@@ -82,6 +82,20 @@ export const Routing = [
 				path: '/Files/Jobs',
 				component: Files.Jobs
 			},
+			// // Macros
+			// {
+			// 	icon: 'mdi-polymer',
+			// 	caption: 'menu.files.macros',
+			// 	path: '/Files/Macros',
+			// 	component: Files.Macros
+			// },
+			// // Filaments
+			// {
+			// 	icon: 'mdi-radiobox-marked',
+			// 	caption: 'menu.files.filaments',
+			// 	path: '/Files/Filaments',
+			// 	component: Files.Filaments
+			// },
 			// Display
 			{
 				icon: 'mdi-format-list-numbered',
@@ -89,7 +103,43 @@ export const Routing = [
 				path: '/Files/Display',
 				component: Files.Display,
 				condition: 'display'
+			},
+			// System
+			{
+				icon: 'mdi-cog',
+				caption: 'menu.files.system',
+				path: '/Files/System',
+				component: Files.System
 			}
+		]
+	},
+	// Settings
+	{
+		icon: 'mdi-wrench',
+		caption: 'menu.settings.caption',
+		pages: [
+			// General
+			{
+				icon: 'mdi-tune',
+				caption: 'menu.settings.general',
+				path: '/Settings/General',
+				component: Settings.General
+			}
+			// },
+			// // Machine
+			// {
+			// 	icon: 'mdi-cogs',
+			// 	caption: 'menu.settings.machine',
+			// 	path: '/Settings/Machine',
+			// 	component: Settings.Machine
+			// }
+			// // Update (coming soon)
+			// /* {
+			// 	icon: 'mdi-update',
+			// 	caption: 'menu.settings.update',
+			// 	path: '/Settings/Update',
+			// 	component: Settings.Update
+			// } */
 		]
 	}
 ]
