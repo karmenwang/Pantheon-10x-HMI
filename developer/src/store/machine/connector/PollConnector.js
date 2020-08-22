@@ -395,7 +395,7 @@ export default class PollConnector extends BaseConnector {
 
 		if (statusType === 2) {
 			// Extended Status Response
-			const axisNames = (response.axisNames !== undefined) ? response.axisNames.split('') : ['X', 'Y', 'Z'/*, 'U', 'V', 'W', 'A', 'B', 'C'*/];
+			const axisNames = (response.axisNames !== undefined) ? response.axisNames.split('') : ['X', 'Y', 'Z', 'U', 'V', 'W', 'A', 'B', 'C'];
 			const boardDefinition = getBoardDefinition(this.boardType);
 			this.name = name;
 			this.probeType = response.probe ? response.probe.type : 0;
