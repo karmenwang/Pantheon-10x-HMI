@@ -23,7 +23,7 @@
 					<p class="mb-1">
 					{{ $t('panel.extrude.amount', ['mm']) }}
 					</p>
-						<v-text-field v-model = "amount" placeholder = "Enter amount" :hide-details="auto" :rules="[v => !!v || $t('dialog.inputRequired'), v => !isNumericValue || isNumber(parseFloat(v)) || $t('dialog.numberRequired')]" is-numeric-value @keyup.enter = "editAmount(0)" required ></v-text-field>
+						<v-text-field v-model = "amount" placeholder = "Enter amount" :hide-details="auto" :rules="[v => !!v || $t('dialog.inputRequired'), v => !isNumericValue || isNumber(parseFloat(v)) || $t('dialog.numberRequired')]" is-numeric-value @click = "editAmount(0)" required ></v-text-field>
 					<!-- <v-btn-toggle v-model="amount" mandatory class="d-flex">
 						<v-btn v-for="(savedAmount, index) in extruderAmounts" :key="index" :value="savedAmount" :disabled="uiFrozen" @contextmenu.prevent="editAmount(index)" class="flex-grow-1">
 							{{ savedAmount }}
@@ -34,7 +34,7 @@
 					<p class="mb-1">
 					{{ $t('panel.extrude.feedrate', ['mm/s']) }}
 					</p>
-						<v-text-field v-model = "feedrate" placeholder = "Enter rate" :hide-details="auto" :rules="[v => !!v || $t('dialog.inputRequired'), v => !isNumericValue || isNumber(parseFloat(v)) || $t('dialog.numberRequired')]" is-numeric-value @keyup.enter = "editFeedrate(0)" required ></v-text-field>
+						<v-text-field v-model = "feedrate" placeholder = "Enter rate" :hide-details="auto" :rules="[v => !!v || $t('dialog.inputRequired'), v => !isNumericValue || isNumber(parseFloat(v)) || $t('dialog.numberRequired')]" is-numeric-value @click = "editFeedrate(0)" required ></v-text-field>
 					<!-- <v-btn-toggle v-model="feedrate" mandatory class="d-flex">
 						<v-btn v-for="(savedFeedrate, index) in extruderFeedrates" :key="index" :value="savedFeedrate" :disabled="uiFrozen" @contextmenu.prevent="editFeedrate(index)" class="flex-grow-1">
 							{{ savedFeedrate }}
