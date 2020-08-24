@@ -31,8 +31,8 @@ export default function(hostname) {
 				default: [100, 50, 10, 1, 0.1]
 			},
 			moveFeedrate: 6000,							// mm/min
-			extruderAmounts: [100, 50, 20, 10, 5, 1],	// mm
-			extruderFeedrates: [60, 30, 15, 5, 1],		// mm/s
+			extruderAmounts: [1],	// mm
+			extruderFeedrates: [1],		// mm/s
 			temperatures: {
 				tool: {
 					active: [250, 235, 220, 205, 195, 160, 120, 100, 0],
@@ -100,11 +100,11 @@ export default function(hostname) {
 			},
 			removeCode: (state, code) => state.codes = state.codes.filter(item => item !== code),
 
-			setExtrusionAmount(state, { index, value }) {
-				state.extruderAmounts[index] = value;
+			setExtrusionAmount(state, {  value }) {
+				state.extruderAmounts[0] = value;
 			},
-			setExtrusionFeedrate(state, { index, value }) {
-				state.extruderFeedrates[index] = value;
+			setExtrusionFeedrate(state, {  value }) {
+				state.extruderFeedrates[0] = value;
 			},
 			setMoveStep(state, { axis, index, value }) {
 				if (state.moveSteps[axis] === undefined) {
