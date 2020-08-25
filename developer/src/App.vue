@@ -52,12 +52,17 @@ textarea {
 .v-card__title {
 	font-size: 1rem;
 }
+
+/* html{
+	overflow: hidden;
+} */
+
 </style>
 
 <template>
-	<v-app>
+	<v-app> 
 		<v-navigation-drawer v-model="drawer" clipped fixed app width="300">
-			<div class="pa-2 hidden-sm-and-up">
+			<div class="pa-2 hidden-sm-and-up"> 
 				<connect-btn v-if="isLocal" class="mb-3" block></connect-btn>
 				<emergency-btn block></emergency-btn>
 			</div>

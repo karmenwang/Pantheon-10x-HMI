@@ -4,6 +4,7 @@
 	color: #FFF;
 	border-radius: 8px;
 	display: flex;
+
 }
 
 h1 {
@@ -209,10 +210,10 @@ export default {
 					height = width * 3 / 4;
 					break;
 				case 'xl':
-					height = width * 10 / 16;
+					height = width *0.41;//10 / 16;
 					break;
 				default:
-					height = width * 9 / 16;
+					height = width * 0.41;//9 / 16;
 					break;
 			}
 

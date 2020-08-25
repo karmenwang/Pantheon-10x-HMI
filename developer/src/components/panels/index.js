@@ -73,7 +73,7 @@ export default {
 	SettingsCommunicationPanel,
 	SettingsElectronicsPanel,
 	SettingsEndstopsPanel,
-	SettingsGeneralPanel,
+	// SettingsGeneralPanel,
 	SettingsMachinePanel,
 	SettingsListItemsPanel,
 	SettingsNotificationsPanel,

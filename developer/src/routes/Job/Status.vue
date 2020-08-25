@@ -1,6 +1,6 @@
 <style scoped>
 .chart-height-limit {
-	max-height: 320px;
+	max-height: 400px;
 }
 </style>
 
@@ -33,12 +33,12 @@
 				<layer-chart class="chart-height-limit" :class="{ 'my-3': $vuetify.breakpoint.mdAndUp }"></layer-chart>
 
 				<v-row class="flex-grow-0 flex-shrink-1 d-none d-md-flex">
-					<v-col cols="12">
+					<!-- <v-col cols="12">
 						<job-estimations-panel></job-estimations-panel>
-					</v-col>
-					<v-col cols="12">
+					</v-col> -->
+					<!-- <v-col cols="12">
 						<job-data-panel></job-data-panel>
-					</v-col>
+					</v-col> -->
 				</v-row>
 
 				<!-- <v-row class="flex-grow-0 flex-shrink-1 hidden-sm-and-up mt-3">
@@ -53,7 +53,13 @@
 
 			<v-col order="2" order-md="3" cols="12" sm="6" md="4" xl="3" class="py-0">
 				<v-row>
-					<v-col cols="12" class="hidden-md-and-up">
+					<v-col cols="12">
+						<job-data-panel></job-data-panel>
+					</v-col>
+					<v-col cols="12">
+						<job-estimations-panel></job-estimations-panel>
+					</v-col>
+					<!-- <v-col cols="12" class="hidden-md-and-up">
 						<job-estimations-panel></job-estimations-panel>
 					</v-col>
 					<v-col cols="12" class="hidden-md-and-up">
@@ -63,7 +69,7 @@
 						<job-info-panel></job-info-panel>
 					</v-col>
 
-					<!-- <v-col cols="12" class="hidden-sm-only">
+					<v-col cols="12" class="hidden-sm-only">
 						<speed-factor-panel></speed-factor-panel>
 					</v-col>
 					<v-col cols="12">
@@ -73,7 +79,7 @@
 						<extrusion-factors-panel></extrusion-factors-panel>
 					</v-col> -->
 				</v-row>
-			</v-col>
+			</v-col> 
 		</v-row>
 	</div>
 </template>
