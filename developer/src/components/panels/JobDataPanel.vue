@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title class="pb-1">
 			<v-icon small class="mr-1">mdi-dots-horizontal</v-icon> {{ $t('panel.jobData.caption') }}
 		</v-card-title>

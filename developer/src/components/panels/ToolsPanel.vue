@@ -23,10 +23,15 @@ table.extra tr > th:first-child,
 table.extra tr > td:first-child {
 	width: 50%;
 }
+
+a:link {
+    text-decoration: none;
+}
+
 </style>
 
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title class="py-2">
 			<panel-link :active="currentPage !== 'tools'" @click="currentPage = 'tools'" class="mr-2">
 				<v-icon small>mdi-wrench</v-icon> {{ $t('panel.tools.caption') }}
@@ -44,9 +49,9 @@ table.extra tr > td:first-child {
 					</a>
 				</template>
 
-				<v-card>
+				<v-card outlined>
 					<v-layout justify-center column class="pt-2 px-2">
-						<v-btn block color="primary" class="mb-3 pa-2" :disabled="!canTurnEverythingOff" @click="turnEverythingOff">
+						<v-btn depressed block color="primary" class="mb-3 pa-2" :disabled="!canTurnEverythingOff" @click="turnEverythingOff">
 							<v-icon class="mr-1">mdi-power-standby</v-icon> {{ $t('panel.tools.turnEverythingOff') }}
 						</v-btn>
 
@@ -56,10 +61,11 @@ table.extra tr > td:first-child {
 				</v-card>
 			</v-menu>
 		</v-card-title>
+		<v-divider></v-divider>
 
 		<v-card-text class="pa-0">
 			<template v-if="currentPage === 'tools'">
-				<table class="tools" v-show="canShowTools">
+				<table class="tools pt-2" v-show="canShowTools">
 					<thead>
 						<th class="pl-2">{{ $t('panel.tools.tool', ['']) }}</th>
 						<th class="px-1">{{ $t('panel.tools.heater', ['']) }}</th>
@@ -136,9 +142,12 @@ table.extra tr > td:first-child {
 											</a>
 											<template v-if="toolHeater.state !== null">
 												<br>
-												<span class="font-weight-regular caption">
+												<!-- <span class="font-weight-regular caption pill">
 													{{ $t(`generic.heaterStates.${toolHeater.state}`) }}
-												</span>
+												</span> -->
+												<v-chip :color = "stateColor(toolHeater)" text-color = "white" small value label class = "font-weight-regular caption">
+													{{ $t(`generic.heaterStates.${toolHeater.state}`) }}
+												</v-chip>
 											</template>
 										</template>
 										<span v-else>
@@ -152,7 +161,7 @@ table.extra tr > td:first-child {
 									</td>
 
 									<!-- Heater active -->
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input :tool="tool" :tool-heater-index="toolHeaterIndex" active></tool-input>
 									</td>
 
@@ -197,9 +206,13 @@ table.extra tr > td:first-child {
 										</a>
 										<template v-if="bedHeater.state !== null">
 											<br>
-											<span class="font-weight-regular caption">
-												{{ $t(`generic.heaterStates.${bedHeater.state}`) }}
-											</span>
+											<!-- <span class="font-weight-regular caption">
+												{{ $t(`generic.heaterStates.${bedHeater.state}`) }}			
+											</span> -->
+											<v-chip :color = "stateColor(bedHeater)" text-color = "white" small label value class = "font-weight-regular caption">
+												{{ $t(`generic.heaterStates.${bedHeater.state}`) }}			
+											</v-chip>
+
 										</template>
 									</th>
 
@@ -209,7 +222,7 @@ table.extra tr > td:first-child {
 									</td>
 
 									<!-- Heater active -->
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input :bed="bedHeater" :bed-index="bedIndex" active></tool-input>
 									</td>
 
@@ -259,7 +272,7 @@ table.extra tr > td:first-child {
 									</td>
 
 									<!-- Heater active -->
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input :chamber="chamberHeater" :chamber-index="chamberIndex" active></tool-input>
 									</td>
 
@@ -273,7 +286,7 @@ table.extra tr > td:first-child {
 					</tbody>
 				</table>
 
-				<v-alert :value="!canShowTools" type="info" class="mb-0">
+				<v-alert color = "secondary" :value="!canShowTools" type="info" class="mb-0">
 					{{ $t('panel.tools.noTools') }}
 				</v-alert>
 
@@ -282,7 +295,7 @@ table.extra tr > td:first-child {
 			</template>
 
 			<template v-else-if="currentPage === 'extra'">
-				<table class="extra ml-2 mr-2" v-show="extraSensors.length">
+				<table class="extra ml-2 mr-2 pt-2" v-show="extraSensors.length">
 					<thead>
 						<th class="hidden-sm-and-down"></th>
 						<th>{{ $t('panel.tools.extra.sensor') }}</th>
@@ -291,7 +304,7 @@ table.extra tr > td:first-child {
 					<tbody>
 						<tr v-for="extraItem in extraSensors" :key="`extra-${extraItem.index}`">
 							<td class="hidden-sm-and-down">
-								<v-switch class="ml-3" :input-value="displayedExtraTemperatures.indexOf(extraItem.index) !== -1" @change="toggleExtraVisibility(extraItem.index)" :label="$t('panel.tools.extra.showInChart')" :disabled="uiFrozen"></v-switch>
+								<v-switch color ="primary" class="ml-3" :input-value="displayedExtraTemperatures.indexOf(extraItem.index) !== -1" @change="toggleExtraVisibility(extraItem.index)" :label="$t('panel.tools.extra.showInChart')" :disabled="uiFrozen"></v-switch>
 							</td>
 							<th class="py-2" :class="getExtraColor(extraItem.index)">
 								{{ formatExtraName(extraItem) }}
@@ -302,7 +315,7 @@ table.extra tr > td:first-child {
 						</tr>
 					</tbody>
 				</table>
-				<v-alert :value="!extraSensors.length" type="info">
+				<v-alert class="mb-0" color = "secondary" :value="!extraSensors.length" type="info">
 					{{ $t('panel.tools.extra.noItems') }}
 				</v-alert>
 			</template>
@@ -343,7 +356,7 @@ export default {
 					this.chamberHeaters.some(chamber => chamber !== null));
 		},
 		selectedToolClass() {
-			return this.darkTheme ? 'grey darken-3' : 'blue lighten-5';
+			return this.darkTheme ? 'grey darken-3' : 'teal lighten-5';
 		},
 		extraSensors() {
 			return this.sensors.analog
@@ -376,6 +389,7 @@ export default {
 		}
 	},
 	data() {
+
 		return {
 			dropdownShown: false,
 			turningEverythingOff: false,
@@ -615,6 +629,25 @@ export default {
 				return item.sensor.name;
 			}
 			return this.$t('panel.tools.extra.sensorIndex', [item.index]);
+		},
+
+		stateColor (heater) {
+			switch(heater.state){
+				case HeaterState.off:		// Off -> Active
+					return 'grey';
+
+				case HeaterState.standby:	// Standby -> Off
+					return 'yellow darken-2';
+
+				case HeaterState.active:	// Active -> Standby
+					return 'success';
+
+				case HeaterState.fault:		// Fault -> Ask for reset
+					return 'error';
+
+				default:	// Active -> Off
+					return 'grey';
+			}
 		}
 	}
 }

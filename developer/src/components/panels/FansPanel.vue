@@ -1,5 +1,5 @@
-<!--<template>
-	<v-card>
+<template>
+	<v-card outlined>
 		<v-card-title class="pb-0">
 			<v-icon small class="mr-1">mdi-fan</v-icon> {{ $t('panel.fans.caption') }}
 			<v-spacer></v-spacer>
@@ -41,7 +41,7 @@
 			{{ $t('panel.fans.noFans') }}
 		</v-alert>
 	</v-card>
-</template>-->
+</template>
 
 <script>
 'use strict'

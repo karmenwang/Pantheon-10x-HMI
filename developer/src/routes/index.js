@@ -96,20 +96,20 @@ export const Routing = [
 			// 	path: '/Files/Filaments',
 			// 	component: Files.Filaments
 			// },
-			// Display
+			//Display
 			{
 				icon: 'mdi-format-list-numbered',
 				caption: 'menu.files.menu',
 				path: '/Files/Display',
 				component: Files.Display,
 				condition: 'display'
-			},
-			// System
-			{
-				icon: 'mdi-cog',
-				caption: 'menu.files.system',
-				path: '/Files/System',
-				component: Files.System
+			// },
+			// // System
+			// {
+			// 	icon: 'mdi-cog',
+			// 	caption: 'menu.files.system',
+			// 	path: '/Files/System',
+			// 	component: Files.System
 			}
 		]
 	},

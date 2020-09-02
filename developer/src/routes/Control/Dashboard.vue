@@ -4,24 +4,25 @@
 			<movement-panel class="mb-2"></movement-panel>
 
 			<v-row v-if="isFFForUnset">
-				<v-col sm="12" :md="(atxPower !== null) ? 9 : 12" :lg="(atxPower !== null) ? 9 : 12" :xl="(atxPower !== null) ? 10 : 12">
+				<!-- <v-col sm="12" :md="(atxPower !== null) ? 9 : 12" :lg="(atxPower !== null) ? 9 : 12" :xl="(atxPower !== null) ? 10 : 12"> -->
+				<v-col>
 					<extrude-panel></extrude-panel>
 				</v-col>
 
-				<v-col v-if="atxPower !== null" md="3" lg="3" xl="2" align-self="center">
+				<!-- <v-col v-if="atxPower !== null" md="3" lg="3" xl="2" align-self="center">
 					<atx-panel></atx-panel>
-				</v-col>
+				</v-col> -->
 			</v-row>
 
-			<v-row>
-				<!-- <v-col sm="12" :md="(!isFFForUnset && atxPower !== null) ? 9 : 12" :lg="(!isFFForUnset && atxPower !== null) ? 9 : 12" :xl="(!isFFForUnset && atxPower !== null) ? 10 : 12">
+			<!-- <v-row>
+				<v-col sm="12" :md="(!isFFForUnset && atxPower !== null) ? 9 : 12" :lg="(!isFFForUnset && atxPower !== null) ? 9 : 12" :xl="(!isFFForUnset && atxPower !== null) ? 10 : 12">
 					<fan-panel></fan-panel>
-				</v-col> -->
+				</v-col>
 
 				<v-col v-if="!isFFForUnset && atxPower !== null" md="3" lg="3" xl="2" align-self="center">
 					<atx-panel></atx-panel>
 				</v-col>
-			</v-row>
+			</v-row> -->
 		</v-col>
 
 		<v-col class="hidden-xs-only" sm="4" md="4" lg="3" xl="3">

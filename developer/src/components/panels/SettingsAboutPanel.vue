@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title>
 			<span>Duet Web Control {{ version }}</span>
 			<v-spacer></v-spacer>

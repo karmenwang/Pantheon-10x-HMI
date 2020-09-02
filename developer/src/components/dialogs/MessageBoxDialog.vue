@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="shown" :persistent="persistent">
-		<v-card>
+		<v-card >
 			<v-card-title class="justify-center">
 				<span class="headline">
 					{{ messageBox ? messageBox.title : $t('generic.noValue') }}
@@ -47,10 +47,10 @@
 
 			<v-card-actions v-if="messageBox && messageBox.mode !== 0">
 				<v-spacer></v-spacer>
-				<v-btn v-if="messageBox && (messageBox.mode === 1 || messageBox.mode === 3)" color="blue darken-1" text @click="cancel">
+				<v-btn depressed v-if="messageBox && (messageBox.mode === 1 || messageBox.mode === 3)" color="primary" text @click="cancel">
 					{{ $t(messageBox.mode === 1 ? 'generic.close' : 'generic.cancel') }}
 				</v-btn>
-				<v-btn v-if="messageBox && (messageBox.mode === 2 || messageBox.mode === 3)" color="blue darken-1" text @click="ok">
+				<v-btn depressed v-if="messageBox && (messageBox.mode === 2 || messageBox.mode === 3)" color="primary" text @click="ok">
 					{{ $t('generic.ok') }}
 				</v-btn>
 				<v-spacer></v-spacer>

@@ -1,5 +1,5 @@
-<!--<template>
-	<v-card>
+<template>
+	<v-card outlined>
 		<v-card-title class="pb-0">
 			{{ $t('panel.settingsGeneral.caption') }}
 			<v-spacer></v-spacer>
@@ -27,7 +27,7 @@
 
 		<confirm-dialog :shown.sync="showResetConfirmation" :title="$t('dialog.factoryReset.title')" :prompt="$t('dialog.factoryReset.prompt')" @confirmed="reset"></confirm-dialog>
 	</v-card>
-</template>-->
+</template>
 
 <script>
 'use strict'

@@ -59,7 +59,7 @@ img {
 </style>
 
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title>
 			{{ $t('panel.webcam.caption') }}
 		</v-card-title>

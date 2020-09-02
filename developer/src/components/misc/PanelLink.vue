@@ -2,6 +2,11 @@
 span {
 	cursor: default;
 }
+
+a:link {
+    text-decoration: none;
+}
+
 </style>
 
 <template>

@@ -37,7 +37,7 @@ h1 {
 </style>
 
 <template>
-	<v-card class="card">
+	<v-card class="card" outlined>
 		<v-card-text class="py-1">
 			<v-row>
 				<!-- TODO: Add CSV list here -->
@@ -78,14 +78,14 @@ h1 {
 						<div class="d-flex flex-column mt-1">
 							{{ $t('panel.heightmap.colorScheme') }}
 							<v-btn-toggle v-model="colorScheme" class="mt-1">
-								<v-btn value="terrain" class="flex-grow-1">{{ $t('panel.heightmap.terrain') }}</v-btn>
-								<v-btn value="heat" class="flex-grow-1">{{ $t('panel.heightmap.heat') }}</v-btn>
+								<v-btn depressed value="terrain" class="flex-grow-1">{{ $t('panel.heightmap.terrain') }}</v-btn>
+								<v-btn depressed value="heat" class="flex-grow-1">{{ $t('panel.heightmap.heat') }}</v-btn>
 							</v-btn-toggle>
 						</div>
-						<v-btn @click="topView" :disabled="!ready" class="ml-0 my-3" >
+						<v-btn depressed @click="topView" :disabled="!ready" class="ml-0 my-3" >
 							<v-icon small class="mr-1">mdi-format-vertical-align-bottom</v-icon> {{ $t('panel.heightmap.topView') }}
 						</v-btn>
-						<v-btn class="ml-0" :disabled="!isConnected" :loading="loading" @click="getHeightmap()">
+						<v-btn depressed class="ml-0" :disabled="!isConnected" :loading="loading" @click="getHeightmap()">
 							<v-icon class="mr-1">mdi-refresh</v-icon> {{ $t('panel.heightmap.reload') }}
 						</v-btn>
 					</div>

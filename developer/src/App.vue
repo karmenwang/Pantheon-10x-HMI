@@ -1,3 +1,4 @@
+
 <style>
 #title:not(:hover) {
 	color: inherit;
@@ -33,9 +34,9 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-a:not(:hover) {
+/* a:not(:hover) {
 	text-decoration: none;
-}
+} */
 
 textarea {
 	line-height: 1.25rem !important;
@@ -50,9 +51,12 @@ textarea {
 }
 
 .v-card__title {
-	font-size: 1rem;
+	font-size: 1.1rem;
 }
 
+.custom-transform-class{
+	text-transform: uppercase;
+}
 /* html{
 	overflow: hidden;
 } */
@@ -61,8 +65,8 @@ textarea {
 
 <template>
 	<v-app> 
-		<v-navigation-drawer v-model="drawer" clipped fixed app width="300">
-			<div class="pa-2 hidden-sm-and-up"> 
+		<v-navigation-drawer v-model="drawer" clipped fixed app width="300" >
+			<div class="pa-2 hidden-sm-and-up " > 
 				<connect-btn v-if="isLocal" class="mb-3" block></connect-btn>
 				<emergency-btn block></emergency-btn>
 			</div>
@@ -79,30 +83,34 @@ textarea {
 						</v-list-item-icon>
 						<v-list-item-title>{{ $t(page.caption) }}</v-list-item-title>
 					</v-list-item>
+					<v-divider></v-divider>
 				</v-list-group>
 			</v-list>
+			<div class="d-flex justify-space-between pa-4">
+			</div>
 		</v-navigation-drawer>
 
-		<v-app-bar ref="appToolbar" app clipped-left>
+		<v-app-bar ref="appToolbar" app clipped-left color = "#888888" flat>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer">
-				<v-icon>mdi-menu</v-icon>
+				<v-icon color = "white" >mdi-menu</v-icon>
 			</v-app-bar-nav-icon>
-			<v-toolbar-title>
-				<!-- TODO: Optional OEM branding -->
-				<a href="javascript:void(0)" id="title">{{ name }}</a>
+			<v-img :src="require('@/assets/202008_asset_logow44550.png')" alt="" contain height = "25px" width = "25px" position = "left" aspect-ratio= "1">
+			</v-img>
+			<v-spacer>
+			<v-toolbar-title class="white--text custom-transform-class font-weight-medium " href="javascript:void(0)" id="title">{{ name }}
+			<connect-btn v-if="isLocal" class="hidden-xs-only font-weight-medium"></connect-btn>
 			</v-toolbar-title>
-			<connect-btn v-if="isLocal" class="hidden-xs-only"></connect-btn>
-
-			<v-spacer></v-spacer>
+			</v-spacer>
+			<!-- <v-spacer></v-spacer> -->
 
 			<!-- <code-input class="mx-3 hidden-sm-and-down"></code-input>
 
 			<v-spacer></v-spacer> -->
 
-			<upload-btn target="start" class="mr-3 hidden-sm-and-down"></upload-btn>
-			<emergency-btn class="hidden-xs-only"></emergency-btn>
+			<!-- <upload-btn target="start" class="mr-3 hidden-sm-and-down"></upload-btn> -->
+			<emergency-btn class="hidden-xs-only "></emergency-btn>
 
-			<v-btn icon class="hidden-md-and-up ml-3" :class="toggleGlobalContainerColor" @click="hideGlobalContainer = !hideGlobalContainer">
+			<v-btn depressed color = "info" icon class="hidden-md-and-up ml-3" :class="toggleGlobalContainerColor" @click="hideGlobalContainer = !hideGlobalContainer">
 				<v-icon>mdi-aspect-ratio</v-icon>
 			</v-btn>
 		</v-app-bar>
@@ -166,6 +174,7 @@ export default {
 		}),
 		...mapGetters('machine', ['hasTemperaturesToDisplay']),
 		...mapGetters('machine/model', ['jobProgress']),
+		
 		toggleGlobalContainerColor() {
 			if (this.hideGlobalContainer) {
 				return this.darkTheme ? 'red darken-5' : 'red lighten-4';
@@ -173,6 +182,8 @@ export default {
 			return this.darkTheme ? 'green darken-5' : 'green lighten-4';
 		}
 	},
+	
+	
 	data() {
 		return {
 			drawer: this.$vuetify.breakpoint.lgAndUp,
@@ -200,6 +211,7 @@ export default {
 			}
 			return true;
 		},
+		
 		updateTitle() {
 			const jobProgress = this.jobProgress;
 			const title = ((jobProgress > 0 && isPrinting(this.status)) ? `(${(jobProgress * 100).toFixed(1)}%) ` : '') + this.name;

@@ -7,7 +7,7 @@
 </style>
 
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title>
 			<code-btn v-show="visibleAxes.length" color="primary" small code="G28" :title="$t('button.home.titleAll')" class="ml-0 hidden-sm-and-down">
 				{{ $t('button.home.captionAll') }}
@@ -21,12 +21,12 @@
 
 			<v-menu offset-y left :disabled="uiFrozen">
 				<template #activator="{ on }">
-					<v-btn v-show="visibleAxes.length" color="primary" small class="mx-0" :disabled="uiFrozen" v-on="on">
+					<v-btn depressed v-show="visibleAxes.length" color="primary" small class="mx-0" :disabled="uiFrozen" v-on="on">
 						{{ $t('panel.movement.compensation') }} <v-icon>mdi-menu-down</v-icon>
 					</v-btn>
 				</template>
 
-				<v-card>
+				<v-card outlined>
 					<v-list>
 						<template v-show="move.compensation">
 							<v-list-item>
@@ -63,6 +63,7 @@
 				</v-card>
 			</v-menu>
 		</v-card-title>
+		<v-divider></v-divider>
 
 		<v-card-text v-show="visibleAxes.length">
 			<!-- Mobile home buttons -->
@@ -74,7 +75,7 @@
 				</v-col>
 				<template v-if="!isDelta">
 					<v-col v-for="(axis, axisIndex) in visibleAxes" :key="axisIndex">
-						<code-btn :color="axis.homed ? 'primary' : 'warning'" :disabled="uiFrozen" :title="$t('button.home.title', [axis.letter])" :code="`G28 ${axis.letter}`" block tile>
+						<code-btn :color="axis.homed ? 'primary' : 'secondary'" :disabled="uiFrozen" :title="$t('button.home.title', [axis.letter])" :code="`G28 ${axis.letter}`" block tile>
 
 							{{ $t('button.home.caption', [axis.letter]) }}
 						</code-btn>
@@ -85,7 +86,7 @@
 			<v-row v-for="(axis, axisIndex) in visibleAxes" :key="axisIndex" dense>
 				<!-- Regular home buttons -->
 				<v-col v-if="!isDelta" cols="auto" class="flex-shrink-1 hidden-sm-and-down">
-					<code-btn :color="axis.homed ? 'primary' : 'warning'" :disabled="uiFrozen" :title="$t('button.home.title', [axis.letter])" :code="`G28 ${axis.letter}`" class="ml-0">
+					<code-btn :color="axis.homed ? 'primary' : 'secondary'" :disabled="uiFrozen" :title="$t('button.home.title', [axis.letter])" :code="`G28 ${axis.letter}`" class="ml-0">
 
 						{{ $t('button.home.caption', [axis.letter]) }}
 					</code-btn>
@@ -95,7 +96,7 @@
 				<v-col>
 					<v-row no-gutters>
 						<v-col v-for="index in numMoveSteps" :key="-index"  :class="getMoveCellClass(index - 1)">
-							<code-btn :code="`M120\nG91\nG1 ${axis.letter}${-moveSteps(axis.letter)[index - 1]} F${moveFeedrate}\nG90\nM121`" no-wait @contextmenu.prevent="showMoveStepDialog(axis.letter, index - 1)" block tile class="move-btn">
+							<code-btn color= "grey darken-1" outlined :code="`M120\nG91\nG1 ${axis.letter}${-moveSteps(axis.letter)[index - 1]} F${moveFeedrate}\nG90\nM121`" no-wait @contextmenu.prevent="showMoveStepDialog(axis.letter, index - 1)" block tile class="move-btn">
 								<v-icon>mdi-chevron-left</v-icon> {{ axis.letter + showSign(-moveSteps(axis.letter)[index - 1]) }}
 							</code-btn>
 						</v-col>
@@ -106,7 +107,7 @@
 				<v-col>
 					<v-row no-gutters>
 						<v-col v-for="index in numMoveSteps" :key="index" :class="getMoveCellClass(numMoveSteps - index)">
-							<code-btn :code="`M120\nG91\nG1 ${axis.letter}${moveSteps(axis.letter)[numMoveSteps - index]} F${moveFeedrate}\nG90\nM121`" no-wait @contextmenu.prevent="showMoveStepDialog(axis.letter, numMoveSteps - index)" block tile class="move-btn">
+							<code-btn color="grey darken-1" outlined :code="`M120\nG91\nG1 ${axis.letter}${moveSteps(axis.letter)[numMoveSteps - index]} F${moveFeedrate}\nG90\nM121`" no-wait @contextmenu.prevent="showMoveStepDialog(axis.letter, numMoveSteps - index)" block tile class="move-btn">
 								{{ axis.letter + showSign(moveSteps(axis.letter)[numMoveSteps - index]) }} <v-icon>mdi-chevron-right</v-icon>
 							</code-btn>
 						</v-col>
@@ -118,14 +119,14 @@
 		<mesh-edit-dialog :shown.sync="showMeshEditDialog"></mesh-edit-dialog>
 		<input-dialog :shown.sync="moveStepDialog.shown" :title="$t('dialog.changeMoveStep.title')" :prompt="$t('dialog.changeMoveStep.prompt')" :preset="moveStepDialog.preset" is-numeric-value @confirmed="moveStepDialogConfirmed"></input-dialog>
 
-		<v-alert :value="unhomedAxes.length !== 0" type="warning" class="mb-0">
+		<v-alert color = "error" :value="unhomedAxes.length !== 0" type="warning" class="mb-0">
 			{{ $tc('panel.movement.axesNotHomed', unhomedAxes.length) }}
 			<strong>
 				{{ unhomedAxes.map(axis => axis.letter).join(', ') }}
 			</strong>
 		</v-alert>
 
-		<v-alert :value="visibleAxes.length === 0" type="info">
+		<v-alert color = "error" :value="visibleAxes.length === 0" type="info">
 			{{ $t('panel.movement.noAxes') }}
 		</v-alert>
 	</v-card>

@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="shown" persistent width="360" @keydown.escape="hide">
-		<v-card>
+		<v-card outlined>
 			<v-card-title class="headline">
 				{{ $t(tool ? (tool.filament ? 'dialog.filament.titleChange' : 'dialog.filament.titleLoad') : 'generic.noValue') }}
 			</v-card-title>
@@ -18,7 +18,7 @@
 
 			<v-card-actions>
 				<v-spacer></v-spacer>
-				<v-btn color="blue darken-1" text @click="hide">{{ $t('generic.cancel') }}</v-btn>
+				<v-btn depressed  color="primary" text @click="hide">{{ $t('generic.cancel') }}</v-btn>
 				<v-spacer></v-spacer>
 			</v-card-actions>
 		</v-card>

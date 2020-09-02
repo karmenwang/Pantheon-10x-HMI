@@ -7,7 +7,7 @@
 <template>
 	<v-row dense align="center">
 		<v-col cols="auto">
-			<v-btn large icon :disabled="disabled || innerValue <= min" @click="change(-step)" @mousedown="mouseDown(false)" @mouseup="mouseUp(false)" @mouseleave="mouseUp(false)" @touchstart="mouseDown(false)" @touchend="mouseUp(false)" class="ml-0">
+			<v-btn depressed large icon :disabled="disabled || innerValue <= min" @click="change(-step)" @mousedown="mouseDown(false)" @mouseup="mouseUp(false)" @mouseleave="mouseUp(false)" @touchstart="mouseDown(false)" @touchend="mouseUp(false)" class="ml-0">
 				<v-icon>mdi-minus</v-icon>
 			</v-btn>
 		</v-col>
@@ -17,7 +17,7 @@
 		</v-col>
 
 		<v-col cols="auto">
-			<v-btn large icon :disabled="disabled || innerValue >= max" @click="change(step)" @mousedown="mouseDown(true)" @mouseup="mouseUp(true)" @mouseleave="mouseUp(true)" @touchstart="mouseDown(true)" @touchend="mouseUp(true)" class="mr-0">
+			<v-btn depressed large icon :disabled="disabled || innerValue >= max" @click="change(step)" @mousedown="mouseDown(true)" @mouseup="mouseUp(true)" @mouseleave="mouseUp(true)" @touchstart="mouseDown(true)" @touchend="mouseUp(true)" class="mr-0">
 				<v-icon>mdi-plus</v-icon>
 			</v-btn>
 		</v-col>

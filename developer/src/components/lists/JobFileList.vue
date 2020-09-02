@@ -1,18 +1,32 @@
+<style>
+.rounded-card{
+    border-radius:4px;
+}
+
+.mytable .v-table tbody tr:not(:last-child) {
+    border-bottom: none;
+}
+
+tr:nth-of-type(even) {
+   background-color: #f5f5f5;
+}
+</style>
+
 <template>
 	<div>
-		<v-toolbar>
+		<v-toolbar flat color="#F5F5F5" class = "rounded-card">
 			<sd-card-btn v-if="volumes.length > 1" v-model="volume" class="hidden-sm-and-down"></sd-card-btn>
 			<directory-breadcrumbs v-model="directory"></directory-breadcrumbs>
 
 			<v-spacer></v-spacer>
 
-			<v-btn class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewDirectory = true">
+			<v-btn depressed color="primary" class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewDirectory = true"> <!--:disabled="uiFrozen"-->
 				<v-icon class="mr-1">mdi-folder-plus</v-icon> {{ $t('button.newDirectory.caption') }}
 			</v-btn>
-			<v-btn class="hidden-sm-and-down mr-3" color="info" :loading="loading || fileinfoProgress !== -1" :disabled="uiFrozen" @click="refresh">
+			<v-btn depressed color= "primary" class="hidden-sm-and-down mr-3" :loading="loading || fileinfoProgress !== -1" :disabled="uiFrozen" @click="refresh">
 				<v-icon class="mr-1">mdi-refresh</v-icon> {{ $t('button.refresh.caption') }}
 			</v-btn>
-			<upload-btn class="hidden-sm-and-down" :directory="directory" target="gcodes" color="primary"></upload-btn>
+			<upload-btn depressed class="hidden-sm-and-down" :directory="directory" target="gcodes" color="primary"></upload-btn>
 		</v-toolbar>
 		
 		<base-file-list ref="filelist" v-model="selection" :headers="headers" :directory.sync="directory" :filelist.sync="filelist" :loading.sync="loading" sort-table="jobs" @directoryLoaded="directoryLoaded" @fileClicked="fileClicked" no-files-text="list.jobs.noJobs">
@@ -30,17 +44,17 @@
 
 		<v-speed-dial v-model="fab" bottom right fixed direction="top" transition="scale-transition" class="hidden-md-and-up">
 			<template #activator>
-				<v-btn v-model="fab" dark color="primary" fab>
+				<v-btn depressed v-model="fab" dark color="primary" fab>
 					<v-icon v-if="fab">mdi-close</v-icon>
 					<v-icon v-else>mdi-dots-vertical</v-icon>
 				</v-btn>
 			</template>
 
-			<v-btn fab :disabled="uiFrozen" @click="showNewDirectory = true">
-				<v-icon>mdi-folder-plus</v-icon>
+			<v-btn depressed fab :disabled="uiFrozen" @click="showNewDirectory = true">
+				<v-icon color ="#888888">mdi-folder-plus</v-icon>
 			</v-btn>
 
-			<v-btn fab color="info" :loading="loading || fileinfoProgress !== -1" :disabled="uiFrozen" @click="refresh">
+			<v-btn depressed fab color="info" :loading="loading || fileinfoProgress !== -1" :disabled="uiFrozen" @click="refresh">
 				<v-icon>mdi-refresh</v-icon>
 			</v-btn>
 

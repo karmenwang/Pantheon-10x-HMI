@@ -27,7 +27,7 @@ a:not(:hover) {
 </style>
 
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title class="py-2">
 			<v-icon small class="mr-1">mdi-information</v-icon> {{ $t('panel.status.caption') }}
 
@@ -39,8 +39,9 @@ a:not(:hover) {
 
 			<span v-if="machineMode">{{ $t('panel.status.mode', [machineMode.toUpperCase()]) }}</span>
 		</v-card-title>
+		<v-divider></v-divider>
 
-		<v-card-text class="px-0 pt-0 pb-2 content text-xs-center" v-show="sensorsPresent || (visibleAxes.length + move.extruders.length)">
+		<v-card-text class="px-0 pt-2 pb-2 content text-xs-center" v-show="sensorsPresent || (visibleAxes.length + move.extruders.length)">
 			<!-- Axis Positions -->
 			<template v-if="visibleAxes.length">
 				<v-row no-gutters class="flex-nowrap">
@@ -212,7 +213,7 @@ a:not(:hover) {
 		</v-card-text>
 
 		<v-card-text class="pa-0" v-show="!sensorsPresent && !(move.axes.length + move.extruders.length)">
-			<v-alert :value="true" type="info">
+			<v-alert color = "secondary" :value="true" type="info">
 				{{ $t('panel.status.noStatus') }}
 			</v-alert>
 		</v-card-text>

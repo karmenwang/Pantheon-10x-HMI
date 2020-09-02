@@ -1,10 +1,11 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title class="pb-0">
 			<v-icon small class="mr-1">mdi-opacity</v-icon> {{ $t('panel.extrude.caption') }}
 		</v-card-title>
+		<v-divider></v-divider>
 
-		<v-card-text class="pb-0">
+		<v-card-text class="pa-2">
 			<v-row class="pb-1" align="center" justify="center">
 				<v-col v-if="currentTool && currentTool.extruders.length > 1" cols="auto">
 					<p class="mb-1">
@@ -20,10 +21,10 @@
 					</v-btn-toggle>
 				</v-col>
 				<v-col>
-					<p class="mb-1">
+					<p class="mb-0 pl-2">
 					{{ $t('panel.extrude.amount', ['mm']) }}
 					</p>
-						<v-text-field v-model = "amount" placeholder = "Enter amount" :rules="[v => !!v || 'This field is required', v =>  /^\d+$/.test(v)||'This field only accept numbers']" is-numeric-value @click = "editAmount(0)" required ></v-text-field>
+					<v-text-field class = "pl-2" color="secondary" v-model = "amount" placeholder = "Enter amount" :rules="[v => !!v || 'This field is required', v =>  /^\d+$/.test(v)||'This field only accept numbers']" is-numeric-value @click = "editAmount(0)" required ></v-text-field>
 					<!-- <v-btn-toggle v-model="amount" mandatory class="d-flex">
 						<v-btn v-for="(savedAmount, index) in extruderAmounts" :key="index" :value="savedAmount" :disabled="uiFrozen" @contextmenu.prevent="editAmount(index)" class="flex-grow-1">
 							{{ savedAmount }}
@@ -31,10 +32,10 @@
 					</v-btn-toggle> -->
 				</v-col>
 				<v-col>
-					<p class="mb-1">
+					<p class="mb-0">
 					{{ $t('panel.extrude.feedrate', ['mm/s']) }}
 					</p>
-						<v-text-field v-model = "feedrate" placeholder = "Enter rate" :rules="[v => !!v || 'This field is required', v =>  /^\d+$/.test(v)||'This field only accept numbers']" is-numeric-value @click = "editFeedrate(0)" required ></v-text-field>
+					<v-text-field color="secondary" v-model = "feedrate" placeholder = "Enter rate" :rules="[v => !!v || 'This field is required', v =>  /^\d+$/.test(v)||'This field only accept numbers']" is-numeric-value @click = "editFeedrate(0)" required ></v-text-field>
 					<!-- <v-btn-toggle v-model="feedrate" mandatory class="d-flex">
 						<v-btn v-for="(savedFeedrate, index) in extruderFeedrates" :key="index" :value="savedFeedrate" :disabled="uiFrozen" @contextmenu.prevent="editFeedrate(index)" class="flex-grow-1">
 							{{ savedFeedrate }}
@@ -42,12 +43,16 @@
 					</v-btn-toggle> -->
 				</v-col>
 				<v-col cols="auto" class="flex-shrink-1">
-					<v-btn block tile :disabled="uiFrozen || !canRetract" :loading="busy" @click="buttonClicked(false)">
-						<v-icon>mdi-arrow-up-bold</v-icon> {{ $t('panel.extrude.retract') }}
-					</v-btn>
-					<v-btn block tile :disabled="uiFrozen || !canExtrude" :loading="busy" @click="buttonClicked(true)">
-						<v-icon>mdi-arrow-down-bold</v-icon> {{ $t('panel.extrude.extrude') }}
-					</v-btn>
+					<div class="py-2 pr-2">
+						<v-btn color= "#888888" class = "white--text" depressed block :disabled="uiFrozen || !canRetract" :loading="busy" @click="buttonClicked(false)">
+							<v-icon>mdi-arrow-up-bold</v-icon> {{ $t('panel.extrude.retract') }}
+						</v-btn>
+					</div>
+					<div class="pr-2">
+						<v-btn color= "#888888" class = "white--text" depressed block :disabled="uiFrozen || !canRetract" :loading="busy" @click="buttonClicked(true)">
+							<v-icon>mdi-arrow-down-bold</v-icon> {{ $t('panel.extrude.extrude') }}
+						</v-btn>
+					</div>
 				</v-col>
 			</v-row>
 		</v-card-text>

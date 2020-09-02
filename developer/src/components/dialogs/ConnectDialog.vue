@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="shown" persistent width="360">
-		<v-card>
+		<v-card outlined>
 			<v-form ref="form" @submit.prevent="submit">
 				<v-card-title class="headline">
 					{{ $t('dialog.connect.title') }}
@@ -9,14 +9,14 @@
 				<v-card-text>
 					{{ $t('dialog.connect.prompt') }}
 
-					<v-text-field v-show="!mustConnect" v-model="hostname" :autofocus="!mustConnect" :placeholder="$t('dialog.connect.hostPlaceholder')" :rules="[v => !!v || $t('dialog.connect.hostRequired')]" required></v-text-field>
-					<v-text-field ref="password" type="password" :placeholder="$t(passwordRequired ? 'dialog.connect.passwordPlaceholder' : 'dialog.connect.passwordPlaceholderOptional')" v-model="password" :autofocus="mustConnect" :rules="[v => !!v || !passwordRequired || $t('dialog.connect.passwordRequired')]" :required="passwordRequired"></v-text-field>
+					<v-text-field color="secondary" v-show="!mustConnect" v-model="hostname" :autofocus="!mustConnect" :placeholder="$t('dialog.connect.hostPlaceholder')" :rules="[v => !!v || $t('dialog.connect.hostRequired')]" required></v-text-field>
+					<v-text-field color = "secondary" ref="password" type="password" :placeholder="$t(passwordRequired ? 'dialog.connect.passwordPlaceholder' : 'dialog.connect.passwordPlaceholderOptional')" v-model="password" :autofocus="mustConnect" :rules="[v => !!v || !passwordRequired || $t('dialog.connect.passwordRequired')]" :required="passwordRequired"></v-text-field>
 				</v-card-text>
 
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn v-show="!mustConnect" color="blue darken-1" text @click="hideConnectDialog">{{ $t('generic.cancel') }}</v-btn>
-					<v-btn color="blue darken-1" text type="submit">{{ $t('dialog.connect.connect') }}</v-btn>
+					<v-btn depressed  v-show="!mustConnect" color="primary" text @click="hideConnectDialog">{{ $t('generic.cancel') }}</v-btn>
+					<v-btn depressed  color="primary" text type="submit">{{ $t('dialog.connect.connect') }}</v-btn>
 				</v-card-actions>
 			</v-form>
 		</v-card>

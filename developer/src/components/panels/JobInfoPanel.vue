@@ -8,7 +8,7 @@ p:last-child {
 </style>
 
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title>
 			<v-icon small class="mr-1">mdi-information</v-icon> {{ $t('panel.jobInfo.caption') }}
 		</v-card-title>

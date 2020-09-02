@@ -10,7 +10,7 @@
 </style>
 
 <template>
-	<v-card class="d-flex flex-column flex-grow-1">
+	<v-card class="d-flex flex-column flex-grow-1" outlined>
 		<v-card-title>
 			<span>
 				<v-icon small class="mr-1">mdi-vector-polyline</v-icon> {{ $t('chart.layer.caption') }}
@@ -161,8 +161,8 @@ export default {
 			options: this.options,
 			data: {
 				datasets: [{
-					borderColor: 'rgba(0, 129, 214, 0.8)',
-					backgroundColor: 'rgba(0, 129, 214, 0.8)',
+					borderColor: 'rgba(0, 173, 181, 0.8)',			//0,129,214,0.8
+					backgroundColor: 'rgba(0, 173, 181, 0.8)',
 					fill: false,
 					label: this.$t('chart.layer.layerTime')
 				}]

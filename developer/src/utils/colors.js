@@ -1,20 +1,21 @@
 'use strict'
 
 const heaterColors = [
-	'primary',
-	'red',
-	'green',
-	'orange',
-	'grey',
-	'lime',
-	'black',
-	'purple',
-	'yellow',
-	'teal',
-	'brown',
-	'deep-orange',
-	'pink',
-	'blue-grey'
+	'secondary',
+	'info',
+	//'success',
+	// 'green',
+	// 'orange',
+	// 'grey',
+	// 'lime',
+	// 'black',
+	// 'purple',
+	// 'yellow',
+	// 'teal',
+	// 'brown',
+	// 'deep-orange',
+	// 'pink',
+	// 'blue-grey'
 ]
 
 export function getHeaterColor(heater) {

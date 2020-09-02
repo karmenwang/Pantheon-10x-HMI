@@ -15,8 +15,8 @@
 </style>
 
 <template>
-	<v-card class="d-flex flex-column flex-grow-1">
-		<v-card-title class="pt-2 pb-0">
+	<v-card class="d-flex flex-column flex-grow-1" outlined>
+		<v-card-title class="pt-2 pb-2">
 			<v-icon class="mr-1">mdi-chart-timeline-variant</v-icon> {{ $t('chart.temperature.caption') }}
 		</v-card-title>
 
@@ -26,7 +26,7 @@
 
 		<v-spacer v-show="!hasTemperaturesToDisplay"></v-spacer>
 		<v-card-text class="pa-0" v-show="!hasTemperaturesToDisplay">
-			<v-alert :value="true" type="info" class="mb-0">
+			<v-alert :value="true" type="info" class="mb-0" color = 'secondary'>
 				{{ $t('chart.temperature.noData') }}
 			</v-alert>
 		</v-card-text>
@@ -216,7 +216,7 @@ export default {
 							},
 							min: 0,
 							max: defaultMaxTemperature,
-							stepSize: 50
+							stepSize: 75
 						}
 					}
 				]

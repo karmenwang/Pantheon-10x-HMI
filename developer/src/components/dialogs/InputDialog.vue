@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="shown" persistent width="360">
-		<v-card>
+		<v-card outlined>
 			<v-form ref="form" @submit.prevent="submit">
 				<v-card-title>
 					<span class="headline">{{ title }}</span>
@@ -9,13 +9,13 @@
 				<v-card-text>
 					{{ prompt }}
 
-					<v-text-field v-model="input" :rules="[v => !!v || $t('dialog.inputRequired'), v => !isNumericValue || isNumber(parseFloat(v)) || $t('dialog.numberRequired')]" required autofocus></v-text-field>
+					<v-text-field color="primary" v-model="input" :rules="[v => !!v || $t('dialog.inputRequired'), v => !isNumericValue || isNumber(parseFloat(v)) || $t('dialog.numberRequired')]" required autofocus></v-text-field>
 				</v-card-text>
 
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="blue darken-1" text @click="hide">{{ $t('generic.cancel') }}</v-btn>
-					<v-btn color="blue darken-1" text type="submit">{{ $t('generic.ok') }}</v-btn>
+					<v-btn depressed color="primary" text @click="hide">{{ $t('generic.cancel') }}</v-btn>
+					<v-btn depressed color="primary" text type="submit">{{ $t('generic.ok') }}</v-btn>
 				</v-card-actions>
 			</v-form>
 		</v-card>

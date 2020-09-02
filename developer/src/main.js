@@ -27,6 +27,29 @@ new Vue({
 		icons: {
 			iconfont: 'mdiSvg',
 		},
-		lang: { t: (key, ...params) => i18n.t(key, params) }
+		lang: { t: (key, ...params) => i18n.t(key, params) },
+		theme: { 
+			dark: false,
+			themes: {
+				dark: {
+					primary: '#faa72b', 		//Pantheon orange
+					secondary: '#00adb5',		//Pantheon teal
+					accent: '#fdcd99',			//Pantheon peach
+					error: '#dd4437',			//red
+					success: '#53d3A3',			//Teal Green
+					warning: '#F68A22',			//Pantheon darker orange
+					info: '#00B4C6'				//Pantheon lighter teal		
+				},
+				light: {
+					primary: '#00adb5',
+					secondary: '#faa72b',
+					accent: '#fdcd99',
+					error: '#dd4437',
+					success: '#4CAF50',	
+					warning: '#FBC02D',
+					info: '#00BEE9'					
+				},
+			},
+		},
 	})
 })

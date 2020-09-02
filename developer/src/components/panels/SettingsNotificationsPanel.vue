@@ -1,12 +1,12 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title>
 			{{ $t('panel.settingsNotifications.caption') }}
 		</v-card-title>
 
 		<v-card-text class="d-flex flex-column">
-			<v-switch class="mt-0 mb-3" v-model="notificationErrorsPersistent" :label="$t('panel.settingsNotifications.notificationErrorsPersistent')" hide-details></v-switch>
-			<v-text-field v-model.number="notificationTimeout" type="number" step="any" min="0" :label="$t('panel.settingsNotifications.notificationTimeout', ['ms'])" hide-details></v-text-field>
+			<v-switch color ="primary" class="mt-0 mb-3" v-model="notificationErrorsPersistent" :label="$t('panel.settingsNotifications.notificationErrorsPersistent')" hide-details></v-switch>
+			<v-text-field color="secondary" v-model.number="notificationTimeout" type="number" step="any" min="0" :label="$t('panel.settingsNotifications.notificationTimeout', ['ms'])" hide-details></v-text-field>
 		</v-card-text>
 	</v-card>
 </template>

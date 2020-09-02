@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title class="pb-0">
 			<span>{{ $t('panel.settingsMachine.caption') }}</span>
 			<v-spacer></v-spacer>
@@ -11,10 +11,10 @@
 		<v-card-text>
 			<v-row>
 				<v-col cols="12" lg="6">
-					<v-text-field v-model.number="babystepAmount" type="number" step="any" min="0.001" :label="$t('panel.settingsMachine.babystepAmount', ['mm'])" hide-details></v-text-field>
+					<v-text-field color="secondary" v-model.number="babystepAmount" type="number" step="any" min="0.001" :label="$t('panel.settingsMachine.babystepAmount', ['mm'])" hide-details></v-text-field>
 				</v-col>
 				<v-col cols="12" lg="6">
-					<v-text-field v-model.number="moveFeedrate" type="number" step="any" min="0.001" :label="$t('panel.settingsMachine.moveFeedrate', ['mm/min'])" hide-details></v-text-field>
+					<v-text-field color="secondary" v-model.number="moveFeedrate" type="number" step="any" min="0.001" :label="$t('panel.settingsMachine.moveFeedrate', ['mm/min'])" hide-details></v-text-field>
 				</v-col>
 			</v-row>
 		</v-card-text>

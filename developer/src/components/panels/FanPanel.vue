@@ -8,8 +8,8 @@
 }
 </style>
 
-	<!--<template>
- <v-card v-show="canControlFans"> 
+<template>
+	<v-card v-show="canControlFans"> 
 		<v-card-title class="pb-0">
 			<v-icon small class="mr-1">mdi-fan</v-icon> {{ $t('panel.fan.caption') }}
 		</v-card-title>
@@ -21,13 +21,13 @@
 						{{ $t('panel.fan.selection') }}
 					</p>
 					<v-btn-toggle v-model="fan" mandatory>
-						<v-btn v-if="currentTool && currentTool.fans.length > 0" :value="-1">
+						<v-btn depressed v-if="currentTool && currentTool.fans.length > 0" :value="-1">
 							{{ $t('panel.fan.toolFan') }}
 						</v-btn>
 
 
 						<template v-for="(fan, index) in fans">
-							<v-btn v-if="fan && fan.thermostatic.heaters.length === 0" :key="index" :value="index" :disabled="uiFrozen">
+							<v-btn depressed v-if="fan && fan.thermostatic.heaters.length === 0" :key="index" :value="index" :disabled="uiFrozen">
 								{{ fan.name ? fan.name : $t('panel.fan.fan', [index]) }}
 							</v-btn>
 						</template>
@@ -40,7 +40,7 @@
 			</v-row>
 		</v-card-text>
 	</v-card>
-</template> -->
+</template> 
 
 <script>
 'use strict'

@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title class="pb-0">
 			{{ $t('panel.settingsCommunication.caption') }}
 		</v-card-title>
@@ -7,23 +7,23 @@
 		<v-card-text>
 			<v-row>
 				<v-col v-if="connectorType === 'rest'">
-					<v-text-field v-model.number="pingInterval" type="number" step="1" min="0" :label="$t('panel.settingsCommunication.pingInterval', ['ms'])" hide-details></v-text-field>
+					<v-text-field color="secondary" v-model.number="pingInterval" type="number" step="1" min="0" :label="$t('panel.settingsCommunication.pingInterval', ['ms'])" hide-details></v-text-field>
 				</v-col>
 				<template v-else-if="connectorType === 'poll'">
 					<v-col cols="6">
-						<v-text-field v-model.number="ajaxRetries" type="number" step="1" min="0" :label="$t('panel.settingsCommunication.ajaxRetries')" hide-details></v-text-field>
+						<v-text-field color="secondary" v-model.number="ajaxRetries" type="number" step="1" min="0" :label="$t('panel.settingsCommunication.ajaxRetries')" hide-details></v-text-field>
 					</v-col>
 					<v-col cols="6">
-						<v-text-field v-model.number="updateInterval" type="number" step="1" min="0" :label="$t('panel.settingsCommunication.updateInterval', ['ms'])" hide-details></v-text-field>
+						<v-text-field color="secondary" v-model.number="updateInterval" type="number" step="1" min="0" :label="$t('panel.settingsCommunication.updateInterval', ['ms'])" hide-details></v-text-field>
 					</v-col>
 					<v-col cols="6">
-						<v-text-field v-model.number="extendedUpdateEvery" type="number" step="1" min="1" :label="$t('panel.settingsCommunication.extendedUpdateEvery')" hide-details></v-text-field>
+						<v-text-field color="secondary" v-model.number="extendedUpdateEvery" type="number" step="1" min="1" :label="$t('panel.settingsCommunication.extendedUpdateEvery')" hide-details></v-text-field>
 					</v-col>
 					<v-col cols="6">
-						<v-text-field v-model.number="fileTransferRetryThreshold" type="number" step="1" min="1" :label="$t('panel.settingsCommunication.fileTransferRetryThreshold', ['KiB'])" hide-details></v-text-field>
+						<v-text-field color="secondary" v-model.number="fileTransferRetryThreshold" type="number" step="1" min="1" :label="$t('panel.settingsCommunication.fileTransferRetryThreshold', ['KiB'])" hide-details></v-text-field>
 					</v-col>
 					<v-col cols="12">
-						<v-switch v-model="crcUploads" :label="$t('panel.settingsCommunication.crcUploads')" hide-details></v-switch>
+						<v-switch color ="secondary" v-model="crcUploads" :label="$t('panel.settingsCommunication.crcUploads')" hide-details></v-switch>
 					</v-col>
 				</template>
 				<v-col v-else>

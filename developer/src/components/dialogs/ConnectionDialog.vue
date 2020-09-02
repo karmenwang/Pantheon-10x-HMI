@@ -1,6 +1,6 @@
 <template>
 	<v-overlay :value="shown" :opacity="0.3">
-		<v-card color="primary" width="480">
+		<v-card color ="primary" width="480" outlined>
 			<v-card-title class="subtitle-1">
 				{{ message }}
 			</v-card-title>
@@ -8,7 +8,7 @@
 			<v-card-text>
 				<v-progress-linear :indeterminate="connectingProgress < 0" :value="connectingProgress" color="white" class="mb-0"></v-progress-linear>
 				<center>
-					<code-btn v-show="displayReset && isConnected" class="mt-5" code="M999" :log="false" color="warning" :title="$t('button.reset.title')">
+					<code-btn v-show="displayReset && isConnected" class="mt-5" code="M999" :log="false" color="secondary" :title="$t('button.reset.title')">
 						<v-icon class="mr-1">mdi-refresh</v-icon> {{ $t('button.reset.caption') }}
 					</code-btn>
 				</center>

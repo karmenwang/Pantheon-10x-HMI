@@ -24,7 +24,7 @@ td {
 			:loading="loading || innerLoading"
 			:custom-sort="sort" :sort-by.sync="internalSortBy" :sort-desc.sync="internalSortDesc" must-sort
 			disable-pagination hide-default-footer :mobile-breakpoint="0"
-			class="base-file-list elevation-3" :class="{ 'empty-table-fix' : !innerFilelist.length, 'loading-cursor' : isLoading }">
+			class="base-file-list elevation-1" :class="{ 'empty-table-fix' : !innerFilelist.length, 'loading-cursor' : isLoading }">
 
 			<template #progress>
 				<slot name="progress">
@@ -34,7 +34,7 @@ td {
 
 			<template #no-data>
 				<slot name="no-data">
-					<v-alert :value="true" type="info" class="text-left ma-0" @contextmenu.prevent="">
+					<v-alert color = "secondary" :value="true" type="info" class="text-left ma-0" @contextmenu.prevent="">
 						{{ $t(noItemsText) }}
 					</v-alert>
 				</slot>

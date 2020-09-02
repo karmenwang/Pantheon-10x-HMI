@@ -1,7 +1,7 @@
 <template>
 	<v-menu offset-y>
 		<template #activator="{ on }">
-			<v-btn v-bind="$props" v-on="on" color="success" :loading="mounting">
+			<v-btn depressed  v-bind="$props" v-on="on" color="secondary" :loading="mounting">
 				<v-icon class="mr-1">mdi-sd</v-icon> {{ getVolumeName(value) }} <v-icon class="ml-1">mdi-menu-down</v-icon>
 			</v-btn>
 		</template>

@@ -1,21 +1,21 @@
 <template>
-	<v-card>
+	<v-card outlined>
 		<v-card-title>
 			{{ $t('panel.settingsAppearance.caption') }}
 		</v-card-title>
-
+	
 		<v-card-text class="d-flex flex-column">
-			<v-switch v-model="darkTheme" :label="$t('panel.settingsAppearance.darkTheme')" hide-details class="mt-0 mb-3"></v-switch>
+			<!-- <v-switch color ="primary" v-model="darkTheme" :label="$t('panel.settingsAppearance.darkTheme')" hide-details class="mt-0 mb-3"></v-switch> -->
 			<v-select v-model="language" :items="languages" item-text="language" item-value="code" :return-object="false" :label="$t('panel.settingsAppearance.language')" hide-details></v-select>
 			<v-tooltip bottom>
 				<template #activator="{ on }">
-					<v-switch v-model="useBinaryPrefix" v-on="on" :label="$t('panel.settingsAppearance.binaryFileSizes')" hide-details></v-switch>
+					<v-switch color ="primary" v-model="useBinaryPrefix" v-on="on" :label="$t('panel.settingsAppearance.binaryFileSizes')" hide-details></v-switch>
 				</template>
 				{{ $t('panel.settingsAppearance.binaryFileSizesTitle') }}
 			</v-tooltip>
 			<v-tooltip bottom>
 				<template #activator="{ on }">
-					<v-switch v-model="disableAutoComplete" v-on="on" :label="$t('panel.settingsAppearance.disableAutoComplete')" hide-details></v-switch>
+					<v-switch color ="primary" v-model="disableAutoComplete" v-on="on" :label="$t('panel.settingsAppearance.disableAutoComplete')" hide-details></v-switch>
 				</template>
 				{{ $t('panel.settingsAppearance.disableAutoCompleteTitle') }}
 			</v-tooltip>

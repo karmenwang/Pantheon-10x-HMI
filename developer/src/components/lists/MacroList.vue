@@ -1,6 +1,14 @@
-<template>
-	<v-card>
+<style>
 
+</style>
+
+<template>
+	<v-card outlined>
+		<v-card-title>
+			<v-icon small class="mr-1">mdi-polymer</v-icon> {{ $t('list.macro.caption') }}
+			<v-spacer></v-spacer>
+			<span v-show="isConnected" class="subtitle-2">{{ directory.replace(macrosDirectory, $t('list.macro.root')) }}</span>
+		</v-card-title>
 
 		<v-card-text class="pa-0" v-show="loading || filelist.length || !isRootDirectory">
 			<v-progress-linear v-show="loading" :indeterminate="true" class="my-0"></v-progress-linear>
@@ -18,7 +26,7 @@
 
 				<v-list-item v-for="item in filelist" :key="item.name" @click="itemClick(item)">
 					<v-list-item-avatar>
-						<v-icon class="mr-1" :class="item.isDirectory ? 'grey lighten-1 white--text' : 'blue white--text'">
+						<v-icon class="mr-1" :class="item.isDirectory ? 'secondary white--text' : 'grey white--text'">			
 							{{ item.isDirectory ? 'mdi-folder' : 'mdi-file' }}
 						</v-icon>
 					</v-list-item-avatar>
@@ -28,12 +36,15 @@
 					</v-list-item-content>
 
 					<v-list-item-action v-if="!item.isDirectory && item.executing">
-						<v-progress-circular class="list-icon" indeterminate color="blue"></v-progress-circular>
+						<v-progress-circular class="list-icon" indeterminate color = "accent"></v-progress-circular>
 					</v-list-item-action>
 				</v-list-item>
 			</v-list>
 		</v-card-text>
 
+		<v-alert :value="!filelist.length" type="info" color = "secondary" class="mb-0">
+			{{ $t('list.macro.noMacros') }}
+		</v-alert>
 
 	</v-card>
 </template>

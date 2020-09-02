@@ -1,5 +1,5 @@
-<!--<template>
-	<v-card>
+<template>
+	<v-card outlined>
 		<v-card-title class="pb-0">
 			<v-icon small class="mr-1">mdi-texture</v-icon> {{ $t('panel.extrusionFactors.caption') }}
 			<v-spacer></v-spacer>
@@ -39,7 +39,7 @@
 			{{ $t('panel.extrusionFactors.noExtruders') }}
 		</v-alert>
 	</v-card>
-</template>-->
+</template>
 
 <script>
 'use strict'

@@ -19,6 +19,11 @@ th:last-child {
 	padding-right: 0 !important;
 	width: 1%;
 }
+
+tr:nth-of-type(even) {
+   background-color: #f5f5f5;
+ }
+
 </style>
 
 <template>
@@ -27,10 +32,10 @@ th:last-child {
 			:headers="headers" :items="events" item-key="date"
 			disable-pagination hide-default-footer :mobile-breakpoint="0"
 			:custom-sort="sort" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" must-sort
-			class="elevation-3" :class="{ 'empty-table-fix' : !events.length }">
+			class="elevation-1" :class="{ 'empty-table-fix' : !events.length }">
 
 			<template #no-data>
-				<v-alert :value="true" type="info" class="text-left ma-0">
+				<v-alert :value="true" type="info" class="text-left ma-0" color = "secondary">
 					{{ $t('list.eventLog.noEvents') }}
 				</v-alert>
 			</template>
@@ -38,7 +43,7 @@ th:last-child {
 			<template #header.btn>
 				<v-menu offset-y>
 					<template #activator="{ on }">
-						<v-btn v-on="on" icon>
+						<v-btn depressed v-on="on" icon>
 							<v-icon small>mdi-menu</v-icon>
 						</v-btn>
 					</template>
@@ -58,15 +63,24 @@ th:last-child {
 			</template>
 
 			<template #item="{ item }">
-				<tr :class="getClassByEvent(item.type)">
+				<!-- <tr :class="getClassByEvent(item.type)"> -->
+				<tr>
 					<td class="log-cell title-cell">
 						{{ item.date.toLocaleString() }}
 					</td>
-					<td class="log-cell content-cell" colspan="2">
+					<td class= "log-cell content-cell">
+						<v-icon small class="status" :color = "getClassByEvent(item.type)">mdi-circle</v-icon>
+					</td>
+					<td class = "log-cell content-cell" colspan="2">
 						<strong>{{ item.title }}</strong>
 						<br v-if="item.title && item.message">
 						<span v-if="item.message" class="message" v-html="formatMessage(item.message)"></span>
 					</td>
+					<!-- <td class="log-cell content-cell" colspan="2">
+						<strong>{{ item.title }}</strong>
+						<br v-if="item.title && item.message">
+						<span v-if="item.message" class="message" v-html="formatMessage(item.message)"></span>
+					</td> -->
 				</tr>
 			</template>
 		</v-data-table>
@@ -94,10 +108,16 @@ export default {
 					width: '15%'
 				},
 				{
+					text: '',
+					value: 'status',
+					sortable: false,
+					width: '10%'
+				},
+				{
 					text: i18n.t('list.eventLog.message'),
 					value: 'message',
 					sortable: false,
-					width: '74%'
+					width: '64%'
 				},
 				{
 					text: '',
@@ -131,14 +151,14 @@ export default {
 					case 'warning': return 'amber darken-1';
 					case 'error': return 'red darken-1';
 				}
-				return 'blue darken-1';
+				return '#FAA72B';
 			} else {
 				switch (type) {
-					case 'success': return 'green accent-2';
-					case 'warning': return 'amber accent-1';
-					case 'error': return 'red accent-1';
+					case 'success': return 'success';
+					case 'warning': return 'warning';
+					case 'error': return 'error';
 				}
-				return 'light-blue accent-1';
+				return 'info';
 			}
 		},
 		formatMessage(message) {

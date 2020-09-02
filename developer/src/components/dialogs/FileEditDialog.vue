@@ -25,22 +25,22 @@
 
 <template>
 	<v-dialog :value="shown" @input="$emit('update:shown', $event)" fullscreen hide-overlay transition="dialog-bottom-transition">
-		<v-card class="d-flex flex-column">
+		<v-card class="d-flex flex-column" outlined>
 			<v-app-bar flat dark color="primary" class="flex-grow-0 flex-shrink-1">
-				<v-btn icon dark @click="close(false)">
+				<v-btn depressed  icon dark @click="close(false)">
 					<v-icon>mdi-close</v-icon>
 				</v-btn>
 				<v-toolbar-title>{{ filename }}</v-toolbar-title>
 
 				<v-spacer></v-spacer>
 
-				<v-btn v-if="showGCodeHelp" dark text href="https://duet3d.dozuki.com/Wiki/Gcode" target="_blank">
+				<v-btn depressed v-if="showGCodeHelp" dark text href="https://duet3d.dozuki.com/Wiki/Gcode" target="_blank">
 					<v-icon class="mr-1">mdi-help</v-icon> {{ $t('dialog.fileEdit.gcodeReference') }}
 				</v-btn>
-				<v-btn v-if="showDisplayHelp" dark text href="https://duet3d.dozuki.com/Wiki/Duet_2_Maestro_12864_display_menu_system" target="_blank">
+				<v-btn depressed v-if="showDisplayHelp" dark text href="https://duet3d.dozuki.com/Wiki/Duet_2_Maestro_12864_display_menu_system" target="_blank">
 					<v-icon class="mr-1">mdi-help</v-icon> {{ $t('dialog.fileEdit.menuReference') }}
 				</v-btn>
-				<v-btn dark text @click="save">
+				<v-btn depressed dark text @click="save">
 					<v-icon class="mr-1">mdi-floppy</v-icon> {{ $t('dialog.fileEdit.save') }}
 				</v-btn>
 			</v-app-bar>
