@@ -5,27 +5,36 @@
 </style>
 
 <template>
-	<v-row class="component flex-shrink-1" :class="{ 'mt-2' : solo, 'grow' : grow }" no-gutters align="center">
-		<v-col>
-			<v-combobox ref="input" dense outlined hide-details :disabled="uiFrozen" :placeholder="$t('input.code.placeholder')"
-						:search-input.sync="code" @click="click" :loading="doingCode" @keyup.enter="send" @change="change" @blur="wasFocused = showItems = false"
-						:items="displayedCodes" @update:list-index="updateSelection" @keyup.down="showItems = true" @keyup.tab.exact="selectItem" hide-selected>
-				<template #item="{ item }">
-					<code>{{ item.text }}</code>
-					<v-spacer></v-spacer>
-					<v-btn depressed icon @click.prevent.stop="removeCode(item.value)">
-						<v-icon>mdi-delete</v-icon>
-					</v-btn>
-				</template>
-			</v-combobox>
-		</v-col>
+	<v-card outlined color="white">
+		<v-row class="component flex-shrink-1" :class="{ 'mt-2' : solo, 'grow' : grow }" no-gutters align="center">
+			<v-col>
+				<!-- <v-combobox ref="input" dense outlined hide-details :disabled="uiFrozen" :placeholder="$t('input.code.placeholder')"
+							:search-input.sync="code" @click="click" :loading="doingCode" @keyup.enter="send" @change="change" @blur="wasFocused = showItems = false"
+							:items="displayedCodes" @update:list-index="updateSelection" @keyup.down="showItems = true" @keyup.tab.exact="selectItem" hide-selected>
+					<template #item="{ item }">
+						<code>{{ item.text }}</code>
+						<v-spacer></v-spacer>
+						<v-btn large depressed icon @click.prevent.stop="removeCode(item.value)">
+							<v-icon>mdi-delete</v-icon>
+						</v-btn>
+					</template>
+				</v-combobox> -->
 
-		<v-col class="ml-2 flex-shrink-1" cols="auto">
-			<v-btn depressed color="secondary" :disabled="uiFrozen" :loading="doingCode" @click="doSend">
-				<v-icon class="mr-2">mdi-send</v-icon> {{ $t('input.code.send') }} 
-			</v-btn>
-		</v-col>
-	</v-row>
+				<v-text-field outlined dense :loading="doingCode"
+					color="secondary" v-model="code" step="any" min="0" :label="$t('input.code.placeholder')"
+					hide-details @click.stop = "editConsoleCommand">
+				</v-text-field>
+				<span>{{code}}</span>
+			</v-col>
+
+			<v-col class="ml-2 flex-shrink-1" cols="auto">
+				<v-btn large depressed color="secondary" :disabled="uiFrozen" :loading="doingCode" @click="doSend">
+					<v-icon class="mr-2">mdi-send</v-icon> {{ $t('input.code.send') }} 
+				</v-btn>
+				</v-col>
+			</v-row>
+		<numerical-keyboard-dialog :shown.sync ="editConsoleCommandDialog.shown" :title="$t('dialog.editConsoleCommand.title')" @confirmed="setConsoleCommand"></numerical-keyboard-dialog>
+	</v-card>
 </template>
 
 <script>
@@ -57,7 +66,10 @@ export default {
 			showItems: false,
 			selectedItem: '',
 			sendPending: false,
-			doingCode: false
+			doingCode: false,
+			editConsoleCommandDialog:{
+				shown: false
+			}
 		}
 	},
 	props: {
@@ -67,6 +79,13 @@ export default {
 	methods: {
 		...mapActions('machine', ['sendCode']),
 		...mapMutations('machine/settings', ['addCode', 'removeCode']),
+		editConsoleCommand(){
+			this.editConsoleCommandDialog.shown = true;
+		},
+		setConsoleCommand(value){
+			this.code=value;
+		},
+
 		click() {
 			if (this.wasFocused) {
 				this.showItems = !this.showItems;

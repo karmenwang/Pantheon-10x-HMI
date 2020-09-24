@@ -57,11 +57,11 @@ Vue.component('webcam-panel', WebcamPanel)
 Vue.component('z-babystep-panel', ZBabystepPanel)
 
 export default {
-	// ATXPanel,
+	ATXPanel,
 	ExtrudePanel,
-	// ExtrusionFactorsPanel,
-	// FanPanel,
-	// FansPanel,
+	ExtrusionFactorsPanel,
+	FanPanel,
+	FansPanel,
 	HeightmapPanel,
 	JobControlPanel,
 	JobDataPanel,
@@ -73,14 +73,14 @@ export default {
 	SettingsCommunicationPanel,
 	SettingsElectronicsPanel,
 	SettingsEndstopsPanel,
-	// SettingsGeneralPanel,
+	SettingsGeneralPanel,
 	SettingsMachinePanel,
 	SettingsListItemsPanel,
 	SettingsNotificationsPanel,
-	// SettingsWebcamPanel,
-	// SpeedFactorPanel,
+	SettingsWebcamPanel,
+	SpeedFactorPanel,
 	StatusPanel,
-	ToolsPanel
-	// WebcamPanel,
-	// ZBabystepPanel
+	ToolsPanel,
+	WebcamPanel,
+	ZBabystepPanel
 }

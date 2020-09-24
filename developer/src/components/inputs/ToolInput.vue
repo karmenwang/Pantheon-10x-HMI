@@ -5,7 +5,7 @@
 </style>
 
 <template>
-	<v-combobox ref="input" type="number" min="-273" max="1999" step="any" class="tool-input" :label="label"
+	<v-combobox color= "secondary" ref="input" type="number" min="-273" max="1999" step="any" class="tool-input" :label="label"
 				v-model.number="value" @keyup.enter="apply" :loading="applying" :disabled="uiFrozen || !isValid"
 				:items="items" @change="change" hide-selected @blur="value = actualValue">
 	</v-combobox>

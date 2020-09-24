@@ -31,8 +31,8 @@ export default function(hostname) {
 				default: [100, 50, 10, 1, 0.1]
 			},
 			moveFeedrate: 6000,							// mm/min
-			extruderAmounts: [1],	// mm
-			extruderFeedrates: [1],		// mm/s
+			extruderAmounts: [10],	// mm
+			extruderFeedrates: [5],		// mm/s
 			temperatures: {
 				tool: {
 					active: [250, 235, 220, 205, 195, 160, 120, 100, 0],

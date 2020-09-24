@@ -13,8 +13,8 @@
 
 			<v-card-actions>
 				<v-spacer></v-spacer>
-				<v-btn depressed color="primary" text @click="dismissed">{{ $t('generic.no') }}</v-btn>
-				<v-btn depressed color="primary" text @click="confirmed">{{ $t('generic.yes') }}</v-btn>
+				<v-btn large depressed color="primary" text @click="dismissed">{{ $t('generic.no') }}</v-btn>
+				<v-btn large depressed color="primary" text @click="confirmed">{{ $t('generic.yes') }}</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>

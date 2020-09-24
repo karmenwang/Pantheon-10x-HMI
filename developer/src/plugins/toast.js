@@ -11,7 +11,8 @@ import { extractFileName } from '../utils/path.js'
 const defaults = {
 	layout: 2,
 	transitionIn: 'fadeInLeft',
-	transitionOut: 'fadeOutRight'
+	transitionOut: 'fadeOutRight',
+	theme: 'dark',
 }
 
 let settings, openNotifications = []
@@ -43,7 +44,6 @@ export function makeNotification(type, title, message, timeout) {
 
 	switch (type) {
 		case 'info':
-			iziToast.info(options);
 			break;
 		case 'success':
 			iziToast.success(options);

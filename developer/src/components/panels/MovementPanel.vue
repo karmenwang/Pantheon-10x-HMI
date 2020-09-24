@@ -7,7 +7,7 @@
 </style>
 
 <template>
-	<v-card outlined>
+	<v-card outlined >
 		<v-card-title>
 			<code-btn v-show="visibleAxes.length" color="primary" small code="G28" :title="$t('button.home.titleAll')" class="ml-0 hidden-sm-and-down">
 				{{ $t('button.home.captionAll') }}
@@ -21,7 +21,7 @@
 
 			<v-menu offset-y left :disabled="uiFrozen">
 				<template #activator="{ on }">
-					<v-btn depressed v-show="visibleAxes.length" color="primary" small class="mx-0" :disabled="uiFrozen" v-on="on">
+					<v-btn large depressed v-show="visibleAxes.length" color="primary" small class="mx-0" :disabled="uiFrozen" v-on="on">
 						{{ $t('panel.movement.compensation') }} <v-icon>mdi-menu-down</v-icon>
 					</v-btn>
 				</template>
@@ -65,7 +65,7 @@
 		</v-card-title>
 		<v-divider></v-divider>
 
-		<v-card-text v-show="visibleAxes.length">
+		<v-card-text v-show="visibleAxes.length" class="py-1">
 			<!-- Mobile home buttons -->
 			<v-row class="hidden-md-and-up py-2" no-gutters>
 				<v-col>
@@ -83,7 +83,7 @@
 				</template>
 			</v-row>
 
-			<v-row v-for="(axis, axisIndex) in visibleAxes" :key="axisIndex" dense>
+			<v-row v-for="(axis, axisIndex) in visibleAxes" :key="axisIndex" > <!--dense-->
 				<!-- Regular home buttons -->
 				<v-col v-if="!isDelta" cols="auto" class="flex-shrink-1 hidden-sm-and-down">
 					<code-btn :color="axis.homed ? 'primary' : 'secondary'" :disabled="uiFrozen" :title="$t('button.home.title', [axis.letter])" :code="`G28 ${axis.letter}`" class="ml-0">
@@ -119,14 +119,14 @@
 		<mesh-edit-dialog :shown.sync="showMeshEditDialog"></mesh-edit-dialog>
 		<input-dialog :shown.sync="moveStepDialog.shown" :title="$t('dialog.changeMoveStep.title')" :prompt="$t('dialog.changeMoveStep.prompt')" :preset="moveStepDialog.preset" is-numeric-value @confirmed="moveStepDialogConfirmed"></input-dialog>
 
-		<v-alert color = "error" :value="unhomedAxes.length !== 0" type="warning" class="mb-0">
+		<v-alert tile color = "error" :value="unhomedAxes.length !== 0" type="warning" class="mb-0">
 			{{ $tc('panel.movement.axesNotHomed', unhomedAxes.length) }}
 			<strong>
 				{{ unhomedAxes.map(axis => axis.letter).join(', ') }}
 			</strong>
 		</v-alert>
 
-		<v-alert color = "error" :value="visibleAxes.length === 0" type="info">
+		<v-alert tile color = "error" :value="visibleAxes.length === 0" type="info">
 			{{ $t('panel.movement.noAxes') }}
 		</v-alert>
 	</v-card>

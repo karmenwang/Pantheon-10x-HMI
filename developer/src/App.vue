@@ -16,8 +16,13 @@
 	background-color: #F5F5F5 !important;
 }
 #global-container .v-card.theme--light {
-	background-color: #F5F5F5 !important;
+	background-color: #f5f5f5!important;
 }
+
+#global-container {
+	background-color: #E8E8E8;
+}
+
 .global-control.theme--dark {
 	background-color: #515151 !important;
 }
@@ -51,21 +56,43 @@ textarea {
 }
 
 .v-card__title {
-	font-size: 1.1rem;
+	font-size: 1.3rem;
 }
 
 .custom-transform-class{
 	text-transform: uppercase;
+	font-size: 2rem;
 }
-/* html{
-	overflow: hidden;
+
+.v-card__text{
+	font-size: 1rem;
+}
+
+.v-list-item__title{
+	font-size: 1.1rem;
+}
+
+html {
+  overflow: hidden !important;
+  scrollbar-width: none;
+  /* -ms-overflow-style: none; */
+}
+/* html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 } */
+
+.v-alert{
+	font-size:1.1rem;
+	border-radius: 0px 0px 3px 3px;
+}
+
 
 </style>
 
 <template>
 	<v-app> 
-		<v-navigation-drawer v-model="drawer" clipped fixed app width="300" >
+		<v-navigation-drawer v-model="drawer" clipped fixed permanent touchless app width="300" >
 			<div class="pa-2 hidden-sm-and-up " > 
 				<connect-btn v-if="isLocal" class="mb-3" block></connect-btn>
 				<emergency-btn block></emergency-btn>
@@ -85,19 +112,32 @@ textarea {
 					</v-list-item>
 					<v-divider></v-divider>
 				</v-list-group>
+				<!-- <v-list-group v-for="(category, index) in routing" :key="index" :prepend-icon="category.icon" no-action :value="isExpanded(category)">
+					<template #activator>
+						<v-list-item-title>{{ $t(category.caption) }}</v-list-item-title>
+					</template>
+
+					<v-list-item v-for="(page, pageIndex) in category.pages.filter(page => checkMenuCondition(page.condition))" :key="`${index}-${pageIndex}`" v-ripple :to="page.path" @click.prevent="">
+						<v-list-item-icon>
+							<v-icon>{{ page.icon }}</v-icon>
+						</v-list-item-icon>
+						<v-list-item-title>{{ $t(page.caption) }}</v-list-item-title>
+					</v-list-item>
+					<v-divider></v-divider>
+				</v-list-group> -->
 			</v-list>
 			<div class="d-flex justify-space-between pa-4">
 			</div>
 		</v-navigation-drawer>
 
-		<v-app-bar ref="appToolbar" app clipped-left color = "#888888" flat>
-			<v-app-bar-nav-icon @click.stop="drawer = !drawer">
+		<v-app-bar ref="appToolbar" app clipped-left color = "#888888" flat height="100">
+			<!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer">
 				<v-icon color = "white" >mdi-menu</v-icon>
-			</v-app-bar-nav-icon>
-			<v-img :src="require('@/assets/202008_asset_logow44550.png')" alt="" contain height = "25px" width = "25px" position = "left" aspect-ratio= "1">
+			</v-app-bar-nav-icon> -->
+			<v-img :src="require('@/assets/202008_asset_logow44550.png')" alt="" contain height = "35px" position = "left" aspect-ratio= "1">
 			</v-img>
 			<v-spacer>
-			<v-toolbar-title class="white--text custom-transform-class font-weight-medium " href="javascript:void(0)" id="title">{{ name }}
+			<v-toolbar-title class="white--text custom-transform-class" href="javascript:void(0)" id="title">{{ name }}
 			<connect-btn v-if="isLocal" class="hidden-xs-only font-weight-medium"></connect-btn>
 			</v-toolbar-title>
 			</v-spacer>
@@ -110,14 +150,14 @@ textarea {
 			<!-- <upload-btn target="start" class="mr-3 hidden-sm-and-down"></upload-btn> -->
 			<emergency-btn class="hidden-xs-only "></emergency-btn>
 
-			<v-btn depressed color = "info" icon class="hidden-md-and-up ml-3" :class="toggleGlobalContainerColor" @click="hideGlobalContainer = !hideGlobalContainer">
+			<v-btn large depressed color = "info" icon class="hidden-md-and-up ml-3" :class="toggleGlobalContainerColor" @click="hideGlobalContainer = !hideGlobalContainer">
 				<v-icon>mdi-aspect-ratio</v-icon>
 			</v-btn>
 		</v-app-bar>
 
 		<v-content id="content">
 			<v-scroll-y-transition>
-				<v-container v-show="!hideGlobalContainer || $vuetify.breakpoint.mdAndUp" id="global-container" fluid class="py-0">
+				<v-container v-show="!hideGlobalContainer || $vuetify.breakpoint.mdAndUp" id="global-container" fluid class="py-2">
 					<v-row>
 						<v-col cols="12" sm="6" md="4" lg="4" xl="4">
 							<status-panel></status-panel>
@@ -136,7 +176,7 @@ textarea {
 
 			<v-divider v-show="!hideGlobalContainer || $vuetify.breakpoint.mdAndUp"></v-divider>
 
-			<v-container fluid class="pt-0">
+			<v-container fluid class="pt-2" fill-height align-content-start>
 				<keep-alive>
 					<router-view></router-view>
 				</keep-alive>

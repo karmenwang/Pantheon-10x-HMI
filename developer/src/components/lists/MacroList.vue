@@ -42,7 +42,7 @@
 			</v-list>
 		</v-card-text>
 
-		<v-alert :value="!filelist.length" type="info" color = "secondary" class="mb-0">
+		<v-alert tile :value="!filelist.length" type="info" color = "secondary" class="mb-0">
 			{{ $t('list.macro.noMacros') }}
 		</v-alert>
 

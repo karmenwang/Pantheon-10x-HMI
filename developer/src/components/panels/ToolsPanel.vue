@@ -24,34 +24,37 @@ table.extra tr > td:first-child {
 	width: 50%;
 }
 
-a:link {
-    text-decoration: none;
+table tr{
+	height: 50px;
 }
 
 </style>
 
 <template>
-	<v-card outlined>
-		<v-card-title class="py-2">
-			<panel-link :active="currentPage !== 'tools'" @click="currentPage = 'tools'" class="mr-2">
-				<v-icon small>mdi-wrench</v-icon> {{ $t('panel.tools.caption') }}
-			</panel-link>
+	<v-card outlined  height="100%">
+		<v-card-title class="py-3">
+			<v-icon small>mdi-wrench</v-icon> {{ $t('panel.tools.caption') }}
+			<!-- <panel-link :active="currentPage !== 'tools'" @click="currentPage = 'tools'" class="mr-2">
+				{{ $t('panel.tools.caption') }}
+			</panel-link> -->
+			<!-- <v-icon small>mdi-plus</v-icon> 
 			<panel-link :active="currentPage !== 'extra'" @click="currentPage = 'extra'">
-				<v-icon small>mdi-plus</v-icon> {{ $t('panel.tools.extra.caption') }}
-			</panel-link>
+				{{ $t('panel.tools.extra.caption') }}
+			</panel-link> -->
 
 			<v-spacer></v-spacer>
 
 			<v-menu v-model="dropdownShown" left offset-y :close-on-content-click="false">
 				<template #activator="{ on }">
+					<v-icon small>mdi-menu-down</v-icon> 
 					<a v-on="on" href="javascript:void(0)">
-						<v-icon small>mdi-menu-down</v-icon> {{ $t('panel.tools.controlAll') }}
+						{{ $t('panel.tools.controlAll') }}
 					</a>
 				</template>
 
 				<v-card outlined>
 					<v-layout justify-center column class="pt-2 px-2">
-						<v-btn depressed block color="primary" class="mb-3 pa-2" :disabled="!canTurnEverythingOff" @click="turnEverythingOff">
+						<v-btn large depressed block color="primary" class="mb-3 pa-2" :disabled="!canTurnEverythingOff" @click="turnEverythingOff">
 							<v-icon class="mr-1">mdi-power-standby</v-icon> {{ $t('panel.tools.turnEverythingOff') }}
 						</v-btn>
 
@@ -65,12 +68,12 @@ a:link {
 
 		<v-card-text class="pa-0">
 			<template v-if="currentPage === 'tools'">
-				<table class="tools pt-2" v-show="canShowTools">
+				<table class="tools pt-3" v-show="canShowTools">
 					<thead>
 						<th class="pl-2">{{ $t('panel.tools.tool', ['']) }}</th>
 						<th class="px-1">{{ $t('panel.tools.heater', ['']) }}</th>
 						<th class="px-1">{{ $t('panel.tools.current', ['']) }}</th>
-						<th class="px-1">{{ $t('panel.tools.active') }}</th>
+						<th class="pr-2">{{ $t('panel.tools.active') }}</th>
 						<!-- <th class="pr-2">{{ $t('panel.tools.standby') }}</th> -->
 					</thead>
 					<tbody>
@@ -87,7 +90,7 @@ a:link {
 									<span class="font-weight-regular caption">
 										T{{ tool.number }}
 
-										<template v-if="isConnected && canLoadFilament(tool)">
+										<!-- <template v-if="isConnected && canLoadFilament(tool)">
 											-
 											<v-menu v-if="getFilament(tool)" offset-y auto>
 												<template #activator="{ on }">
@@ -108,7 +111,7 @@ a:link {
 											<a v-else href="javascript:void(0)" @click="filamentMenu.tool = tool; filamentMenu.dialogShown = true">
 												{{ $t('panel.tools.loadFilament') }}
 											</a>
-										</template>
+										</template> -->
 									</span>
 								</th>
 
@@ -286,7 +289,7 @@ a:link {
 					</tbody>
 				</table>
 
-				<v-alert color = "secondary" :value="!canShowTools" type="info" class="mb-0">
+				<v-alert tile color = "secondary" :value="!canShowTools" type="info" class="mb-0">
 					{{ $t('panel.tools.noTools') }}
 				</v-alert>
 
@@ -294,7 +297,7 @@ a:link {
 				<filament-dialog :shown.sync="filamentMenu.dialogShown" :tool="filamentMenu.tool"></filament-dialog>
 			</template>
 
-			<template v-else-if="currentPage === 'extra'">
+			<!--<template v-else-if="currentPage === 'extra'">
 				<table class="extra ml-2 mr-2 pt-2" v-show="extraSensors.length">
 					<thead>
 						<th class="hidden-sm-and-down"></th>
@@ -304,7 +307,7 @@ a:link {
 					<tbody>
 						<tr v-for="extraItem in extraSensors" :key="`extra-${extraItem.index}`">
 							<td class="hidden-sm-and-down">
-								<v-switch color ="primary" class="ml-3" :input-value="displayedExtraTemperatures.indexOf(extraItem.index) !== -1" @change="toggleExtraVisibility(extraItem.index)" :label="$t('panel.tools.extra.showInChart')" :disabled="uiFrozen"></v-switch>
+								<v-switch color ="secondary" class="ml-3" :input-value="displayedExtraTemperatures.indexOf(extraItem.index) !== -1" @change="toggleExtraVisibility(extraItem.index)" :label="$t('panel.tools.extra.showInChart')" :disabled="uiFrozen"></v-switch>
 							</td>
 							<th class="py-2" :class="getExtraColor(extraItem.index)">
 								{{ formatExtraName(extraItem) }}
@@ -315,10 +318,10 @@ a:link {
 						</tr>
 					</tbody>
 				</table>
-				<v-alert class="mb-0" color = "secondary" :value="!extraSensors.length" type="info">
+				<v-alert tile class="mb-0" color = "secondary" :value="!extraSensors.length" type="info">
 					{{ $t('panel.tools.extra.noItems') }}
 				</v-alert>
-			</template>
+			</template>-->
 		</v-card-text>
 	</v-card>
 </template>

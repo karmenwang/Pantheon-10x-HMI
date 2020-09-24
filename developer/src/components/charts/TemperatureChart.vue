@@ -12,11 +12,12 @@
 .content > canvas {
 	position: absolute;
 }
+
 </style>
 
 <template>
 	<v-card class="d-flex flex-column flex-grow-1" outlined>
-		<v-card-title class="pt-2 pb-2">
+		<v-card-title class="py-3">
 			<v-icon class="mr-1">mdi-chart-timeline-variant</v-icon> {{ $t('chart.temperature.caption') }}
 		</v-card-title>
 
@@ -26,7 +27,7 @@
 
 		<v-spacer v-show="!hasTemperaturesToDisplay"></v-spacer>
 		<v-card-text class="pa-0" v-show="!hasTemperaturesToDisplay">
-			<v-alert :value="true" type="info" class="mb-0" color = 'secondary'>
+			<v-alert :value="true" type="info" class="mb-0" color = 'secondary' tile>
 				{{ $t('chart.temperature.noData') }}
 			</v-alert>
 		</v-card-text>

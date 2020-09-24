@@ -15,8 +15,8 @@
 
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn depressed  v-show="!mustConnect" color="primary" text @click="hideConnectDialog">{{ $t('generic.cancel') }}</v-btn>
-					<v-btn depressed  color="primary" text type="submit">{{ $t('dialog.connect.connect') }}</v-btn>
+					<v-btn large depressed  v-show="!mustConnect" color="primary" text @click="hideConnectDialog">{{ $t('generic.cancel') }}</v-btn>
+					<v-btn large depressed  color="primary" text type="submit">{{ $t('dialog.connect.connect') }}</v-btn>
 				</v-card-actions>
 			</v-form>
 		</v-card>

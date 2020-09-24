@@ -9,22 +9,28 @@ td {
 .loading-cursor td {
 	cursor: wait;
 }
+
 </style>
 
 <style>
 .base-file-list th {
 	white-space: nowrap;
 }
+
+.v-data-footer__select{
+	visibility: hidden;
+}
+
 </style>
 
-<template>
+<template >
 	<div>
-		<v-data-table v-model="innerValue" v-bind="$props"
+		<v-data-table v-model="innerValue" v-bind="$props" fixed-header :items-per-page="8"
 			:items="innerFilelist" item-key="name" :headers="headers || defaultHeaders" show-select 
 			:loading="loading || innerLoading"
 			:custom-sort="sort" :sort-by.sync="internalSortBy" :sort-desc.sync="internalSortDesc" must-sort
-			disable-pagination hide-default-footer :mobile-breakpoint="0"
-			class="base-file-list elevation-1" :class="{ 'empty-table-fix' : !innerFilelist.length, 'loading-cursor' : isLoading }">
+			:mobile-breakpoint="0"
+			class="base-file-list elevation-0" :class="{ 'empty-table-fix' : !innerFilelist.length, 'loading-cursor' : isLoading }">
 
 			<template #progress>
 				<slot name="progress">
@@ -34,7 +40,7 @@ td {
 
 			<template #no-data>
 				<slot name="no-data">
-					<v-alert color = "secondary" :value="true" type="info" class="text-left ma-0" @contextmenu.prevent="">
+					<v-alert tile color = "secondary" :value="true" type="info" class="text-left ma-0" @contextmenu.prevent="">
 						{{ $t(noItemsText) }}
 					</v-alert>
 				</slot>
@@ -172,7 +178,7 @@ export default {
 			return [
 				{
 					text: i18n.t('list.baseFileList.fileName'),
-					value: 'name'
+					value: 'name',
 				},
 				{
 					text: i18n.t('list.baseFileList.size'),

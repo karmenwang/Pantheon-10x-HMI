@@ -12,11 +12,11 @@
 			<v-card-actions>
 				<v-spacer></v-spacer>
 
-				<v-btn depressed color="primary" text :disabled="!!counter" @click="resetFault">
+				<v-btn large depressed color="primary" text :disabled="!!counter" @click="resetFault">
 					{{ $t('dialog.resetHeaterFault.resetFault') + (counter ? ` (${counter})` : '') }}
 				</v-btn>
 
-				<v-btn depressed color="primary" text @click="hide">
+				<v-btn large depressed color="primary" text @click="hide">
 					{{ $t('generic.cancel') }}
 				</v-btn>
 			</v-card-actions>

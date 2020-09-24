@@ -1,12 +1,12 @@
 <template>
 	<v-row>
-		<v-col xs="12" sm="8" md="8" lg="9" xl="9">
+		<v-col cols="12">
 			<movement-panel class="mb-2"></movement-panel>
 
 			<v-row v-if="isFFForUnset">
 				<!-- <v-col sm="12" :md="(atxPower !== null) ? 9 : 12" :lg="(atxPower !== null) ? 9 : 12" :xl="(atxPower !== null) ? 10 : 12"> -->
 				<v-col>
-					<extrude-panel></extrude-panel>
+					<extrude-panel class = "mb-2"></extrude-panel>
 				</v-col>
 
 				<!-- <v-col v-if="atxPower !== null" md="3" lg="3" xl="2" align-self="center">
@@ -24,10 +24,10 @@
 				</v-col>
 			</v-row> -->
 		</v-col>
-
+<!-- 
 		<v-col class="hidden-xs-only" sm="4" md="4" lg="3" xl="3">
 			<macro-list></macro-list>
-		</v-col>
+		</v-col> -->
 	</v-row>
 </template>
 

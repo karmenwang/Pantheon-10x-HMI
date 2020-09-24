@@ -22,7 +22,7 @@
 		</v-card-title>
 
 		<v-card-text class="content flex-grow-1 px-2 py-0">
-			<canvas ref="chart"></canvas>
+			<canvas ref="chart" ></canvas>
 		</v-card-text>
 	</v-card>
 </template>

@@ -14,8 +14,8 @@
 
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn depressed color="primary" text @click="hide">{{ $t('generic.cancel') }}</v-btn>
-					<v-btn depressed color="primary" text type="submit">{{ $t('generic.ok') }}</v-btn>
+					<v-btn large depressed color="primary" text @click="hide">{{ $t('generic.cancel') }}</v-btn>
+					<v-btn large depressed color="primary" text type="submit">{{ $t('generic.ok') }}</v-btn>
 				</v-card-actions>
 			</v-form>
 		</v-card>

@@ -8,6 +8,16 @@ td.log-cell {
 td.title-cell {
 	vertical-align: top;
 }
+
+.v-data-footer__select{
+	visibility: hidden;
+}
+
+.header-title-style th{
+	background-color: #666666;
+	/* font-size: 0.85rem; */
+	border-radius: 3px 3px 0px 0px;
+}
 </style>
 
 <style scoped>
@@ -20,22 +30,18 @@ th:last-child {
 	width: 1%;
 }
 
-tr:nth-of-type(even) {
-   background-color: #f5f5f5;
- }
-
 </style>
 
 <template>
 	<div class="component">
 		<v-data-table
-			:headers="headers" :items="events" item-key="date"
-			disable-pagination hide-default-footer :mobile-breakpoint="0"
+			:headers="headers" :items="events" item-key="date" fixed-header
+			:items-per-page="6" :mobile-breakpoint="0"
 			:custom-sort="sort" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" must-sort
-			class="elevation-1" :class="{ 'empty-table-fix' : !events.length }">
+			class="elevation-0" :class="{ 'empty-table-fix' : !events.length }">
 
 			<template #no-data>
-				<v-alert :value="true" type="info" class="text-left ma-0" color = "secondary">
+				<v-alert tile :value="true" type="info" class="text-left ma-0" color = "secondary">
 					{{ $t('list.eventLog.noEvents') }}
 				</v-alert>
 			</template>
@@ -105,7 +111,7 @@ export default {
 				{
 					text: i18n.t('list.eventLog.date'),
 					value: 'date',
-					width: '15%'
+					width: '15%',
 				},
 				{
 					text: '',

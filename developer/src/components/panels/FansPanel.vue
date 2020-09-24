@@ -37,7 +37,7 @@
 			</div>
 		</v-card-text>
 
-		<v-alert type="info" :value="!visibleFans.length" class="mb-0">
+		<v-alert tile type="info" :value="!visibleFans.length" class="mb-0">
 			{{ $t('panel.fans.noFans') }}
 		</v-alert>
 	</v-card>

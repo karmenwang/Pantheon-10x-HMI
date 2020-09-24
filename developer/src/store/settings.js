@@ -21,6 +21,7 @@ export default {
 		notifications: {
 			errorsPersistent: true,
 			timeout: 5000								// ms
+		
 		},
 		webcam: {
 			url: '',

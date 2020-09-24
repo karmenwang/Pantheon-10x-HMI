@@ -4,8 +4,14 @@ import Vue from 'vue'
 
 import CodeInput from './CodeInput.vue'
 import ToolInput from './ToolInput.vue'
+import SimpleKeyboard from './SimpleKeyboard.vue'
 
 Vue.component('code-input', CodeInput)
 Vue.component('tool-input', ToolInput)
+Vue.component('simple-keyboard', SimpleKeyboard)
 
-export default { CodeInput }
+export default { 
+    CodeInput,
+    SimpleKeyboard
+}
+

@@ -3,19 +3,19 @@
 const heaterColors = [
 	'secondary',
 	'info',
-	//'success',
-	// 'green',
-	// 'orange',
-	// 'grey',
+	'success',
+	'error',
+	//'orange',
+	'grey',
 	// 'lime',
-	// 'black',
-	// 'purple',
-	// 'yellow',
+	'black',
+	'purple',
+	'yellow-darken-2',
 	// 'teal',
-	// 'brown',
+	'brown',
 	// 'deep-orange',
 	// 'pink',
-	// 'blue-grey'
+	'blue-grey'
 ]
 
 export function getHeaterColor(heater) {

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-btn depressed  v-bind="$props" @click="chooseFile" :disabled="$props.disabled || !canUpload" :loading="isBusy" :title="$t(`button.upload['${target}'].title`)" :color="innerColor" @dragover="dragOver" @dragleave="dragLeave" @drop.prevent.stop="dragDrop">
+		<v-btn large depressed  v-bind="$props" @click="chooseFile" :disabled="$props.disabled || !canUpload" :loading="isBusy" :title="$t(`button.upload['${target}'].title`)" :color="innerColor" @dragover="dragOver" @dragleave="dragLeave" @drop.prevent.stop="dragDrop">
 			<template #loader>
 				<v-progress-circular indeterminate :size="23" :width="2" class="mr-2"></v-progress-circular>
 				{{ caption }}

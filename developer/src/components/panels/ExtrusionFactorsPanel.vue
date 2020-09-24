@@ -35,7 +35,7 @@
 			</div>
 		</v-card-text>
 
-		<v-alert type="info" :value="!visibleExtruders.length" class="mb-0">
+		<v-alert tile type="info" :value="!visibleExtruders.length" class="mb-0">
 			{{ $t('panel.extrusionFactors.noExtruders') }}
 		</v-alert>
 	</v-card>

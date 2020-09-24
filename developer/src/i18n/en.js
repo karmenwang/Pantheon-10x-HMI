@@ -168,6 +168,9 @@ export default {
 			reconnecting: 'Connection lost, attempting to reconnect...',
 			standBy: 'Please stand by...'
 		},
+		editConsoleCommand:{
+			title: 'Send Gcode command'
+		},
 		editExtrusionAmount: {
 			title: 'Edit extrusion amount',
 			prompt: 'Please enter a new amount for the clicked button:'
@@ -175,6 +178,9 @@ export default {
 		editExtrusionFeedrate: {
 			title: 'Edit extrusion feedrate',
 			prompt: 'Please enter a new feedrate for the clicked button:'
+		},
+		editNotificationTimeout:{
+			title: 'Edit notification timeout',
 		},
 		factoryReset: {
 			title: 'Perform factory reset?',
@@ -507,7 +513,19 @@ export default {
 			extruder: 'Extruder {0}',
 			noExtruders: 'No Extruders'
 		},
-
+		fan: {
+			caption: 'Fan Control',
+			selection: 'Fan Selection:',
+			toolFan: 'Tool Fan',
+			fan: 'Fan {0}'
+		},
+		fans: {
+			caption: 'Fans',
+			changeVisibility: 'Change Visibility',
+			toolFan: 'Tool Fan',
+			fan: 'Fan {0}',
+			noFans: 'No Fans'
+		},
 		heightmap: {
 			scale: 'Scale:',
 			orMore: 'or more',
@@ -670,7 +688,7 @@ export default {
 			requestedSpeed: 'Requested Speed',
 			topSpeed: 'Top Speed',
 			sensors: 'Sensors',
-			mcuTemp: 'MCU Temperature',
+			mcuTemp: 'MCU Temp',
 			minMax: 'Minimum: {0}, Maximum {1}',
 			vIn: 'Vin',
 			v12: 'V12',

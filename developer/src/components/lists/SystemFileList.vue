@@ -15,13 +15,13 @@
 
 			<v-spacer></v-spacer>
 
-			<v-btn color="primary" depressed class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewFile = true">
+			<v-btn large color="primary" depressed class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewFile = true">
 				<v-icon class="mr-1">mdi-file-plus</v-icon> {{ $t('button.newFile.caption') }}
 			</v-btn>
-			<v-btn color="primary" depressed class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewDirectory = true">
+			<v-btn  large color="primary" depressed class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewDirectory = true">
 				<v-icon class="mr-1">mdi-folder-plus</v-icon> {{ $t('button.newDirectory.caption') }}
 			</v-btn>
-			<v-btn depressed class="hidden-sm-and-down mr-3" color="primary" :loading="loading" :disabled="uiFrozen" @click="refresh">
+			<v-btn large depressed class="hidden-sm-and-down mr-3" color="primary" :loading="loading" :disabled="uiFrozen" @click="refresh">
 				<v-icon class="mr-1">mdi-refresh</v-icon> {{ $t('button.refresh.caption') }}
 			</v-btn>
 			<upload-btn class="hidden-sm-and-down" :directory="directory" target="system" color="primary" @uploadComplete="uploadComplete"></upload-btn>
@@ -36,21 +36,21 @@
 		
 		<v-speed-dial v-model="fab" bottom right fixed direction="top" transition="scale-transition" class="hidden-md-and-up">
 			<template #activator>
-				<v-btn depressed v-model="fab" dark color="primary" fab>
+				<v-btn large depressed v-model="fab" dark color="primary" fab>
 					<v-icon v-if="fab">mdi-close</v-icon>
 					<v-icon v-else>mdi-dots-vertical</v-icon>
 				</v-btn>
 			</template>
 
-			<v-btn depressed fab :disabled="uiFrozen" @click="showNewFile = true">
+			<v-btn large depressed fab :disabled="uiFrozen" @click="showNewFile = true">
 				<v-icon class="mr-1">mdi-file-plus</v-icon>
 			</v-btn>
 
-			<v-btn depressed fab :disabled="uiFrozen" @click="showNewDirectory = true">
+			<v-btn large depressed fab :disabled="uiFrozen" @click="showNewDirectory = true">
 				<v-icon>mdi-folder-plus</v-icon>
 			</v-btn>
 
-			<v-btn depressed fab color="info" :loading="loading" :disabled="uiFrozen" @click="refresh">
+			<v-btn large depressed fab color="info" :loading="loading" :disabled="uiFrozen" @click="refresh">
 				<v-icon>mdi-refresh</v-icon>
 			</v-btn>
 

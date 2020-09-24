@@ -1,10 +1,9 @@
 <style scoped>
 .heightmap-container {
-	background-color: #000;
-	color: #FFF;
+	background-color: #fff; /*#000*/
+	color: #fff;
 	border-radius: 8px;
 	display: flex;
-
 }
 
 h1 {
@@ -25,30 +24,32 @@ h1 {
 
 .canvas-container > :last-child {
 	border-radius: 0 8px 8px 0;
-}
+} 
 
 .canvas-container > canvas {
 	position: absolute;
+	
 }
 
 .no-cursor {
 	pointer-events: none;
 }
+
 </style>
 
 <template>
-	<v-card class="card" outlined>
+	<v-card class="card " outlined>
 		<v-card-text class="py-1">
 			<v-row>
 				<!-- TODO: Add CSV list here -->
 
 				<v-col :class="{ 'pa-1': $vuetify.breakpoint.xs }">
 					<div ref="container" class="heightmap-container" v-resize="resize">
-						<h1 v-show="!ready" class="text-center">
+						<h1 v-show="!ready" class="text-center grey--text"> -->
 							{{ loading ? $t('generic.loading') : (errorMessage ? errorMessage : $t('panel.heightmap.notAvailable')) }}
-						</h1>
+						</h1> 
 
-						<div v-show="ready" class="canvas-container">
+						<div v-show="ready" class="canvas-container" >
 							<canvas ref="canvas" @mousemove="canvasMouseMove"></canvas>
 							<canvas ref="legend" class="legend" width="80"></canvas>
 						</div>
@@ -82,10 +83,10 @@ h1 {
 								<v-btn depressed value="heat" class="flex-grow-1">{{ $t('panel.heightmap.heat') }}</v-btn>
 							</v-btn-toggle>
 						</div>
-						<v-btn depressed @click="topView" :disabled="!ready" class="ml-0 my-3" >
+						<v-btn large depressed @click="topView" :disabled="!ready" class="ml-0 my-3" >
 							<v-icon small class="mr-1">mdi-format-vertical-align-bottom</v-icon> {{ $t('panel.heightmap.topView') }}
 						</v-btn>
-						<v-btn depressed class="ml-0" :disabled="!isConnected" :loading="loading" @click="getHeightmap()">
+						<v-btn large depressed class="ml-0" :disabled="!isConnected" :loading="loading" @click="getHeightmap()">
 							<v-icon class="mr-1">mdi-refresh</v-icon> {{ $t('panel.heightmap.reload') }}
 						</v-btn>
 					</div>
@@ -185,6 +186,7 @@ export default {
 			this.three.camera.up = new Vector3(0, 0, 1);
 			this.three.renderer = new WebGLRenderer({ canvas: this.$refs.canvas });
 			this.three.renderer.setSize(size.width, size.height);
+			this.three.renderer.setClearColor(0xFFFFFF);
 			this.three.orbitControls = new OrbitControls(this.three.camera, this.three.renderer.domElement);
 			this.three.orbitControls.enableKeys = false;
 			this.three.raycaster = new Raycaster();
@@ -210,10 +212,10 @@ export default {
 					height = width * 3 / 4;
 					break;
 				case 'xl':
-					height = width *0.41;//10 / 16;
+					height = 540;//width * 10 / 16;
 					break;
 				default:
-					height = width * 0.41;//9 / 16;
+					height = 540;//width * 9 / 16;
 					break;
 			}
 
@@ -222,6 +224,7 @@ export default {
 			this.$refs.legend.height = height;
 			this.$refs.canvas.width = width;
 			this.$refs.canvas.height = height;
+
 
 			// Resize the 3D height map
 			if (this.three.renderer) {

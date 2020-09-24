@@ -24,31 +24,36 @@ a:not(:hover) {
 .probe-span:not(:last-child) {
 	margin-right: 8px;
 }
+
 </style>
 
 <template>
 	<v-card outlined>
-		<v-card-title class="py-2">
+		<v-card-title class="py-3">
 			<v-icon small class="mr-1">mdi-information</v-icon> {{ $t('panel.status.caption') }}
 
 			<v-spacer></v-spacer>
 
-			<status-label v-if="status"></status-label>
+			<!-- <status-label v-if="status"></status-label> -->
+			<status-label></status-label>
 
 			<v-spacer></v-spacer>
 
-			<span v-if="machineMode">{{ $t('panel.status.mode', [machineMode.toUpperCase()]) }}</span>
+			<!-- <span v-if="machineMode">{{ $t('panel.status.mode', [machineMode.toUpperCase()]) }}</span> -->
 		</v-card-title>
 		<v-divider></v-divider>
 
-		<v-card-text class="px-0 pt-2 pb-2 content text-xs-center" v-show="sensorsPresent || (visibleAxes.length + move.extruders.length)">
+		<v-card-text class=" px-0 py-3 content text-xs-center" v-show="sensorsPresent || (visibleAxes.length + move.extruders.length)">
 			<!-- Axis Positions -->
 			<template v-if="visibleAxes.length">
 				<v-row no-gutters class="flex-nowrap">
-					<v-col tag="strong" class="category-header">
+					<!-- <v-col tag="strong" class="category-header">
 						<a href="javascript:void(0)" @click="displayToolPosition = !displayToolPosition">
 							{{ $t(displayToolPosition ? 'panel.status.toolPosition' : 'panel.status.machinePosition') }}
 						</a>
+					</v-col> -->
+					<v-col tag="strong" class="category-header">
+						{{$t('panel.status.toolPosition')}}
 					</v-col>
 
 					<v-col>
@@ -68,7 +73,7 @@ a:not(:hover) {
 
 			<!-- Extruders -->
 			<template v-if="move.extruders.length">
-				<v-divider v-show="move.axes.length" class="my-2"></v-divider>
+				<v-divider v-show="move.axes.length" class="my-3"></v-divider>
 
 				<v-row align-content="center" no-gutters class="flex-nowrap">
 					<v-col tag="strong" class="category-header">
@@ -92,7 +97,7 @@ a:not(:hover) {
 
 			<!-- Speeds -->
 			<template v-show="isNumber(move.currentMove.requestedSpeed) || isNumber(move.currentMove.topSpeed)">
-				<v-divider v-show="move.axes.length + move.extruders.length" class="my-2"></v-divider>
+				<v-divider v-show="move.axes.length + move.extruders.length" class="my-3"></v-divider>
 
 				<v-row align-content="center" no-gutters class="flex-nowrap">
 					<v-col tag="strong" class="category-header">
@@ -213,7 +218,7 @@ a:not(:hover) {
 		</v-card-text>
 
 		<v-card-text class="pa-0" v-show="!sensorsPresent && !(move.axes.length + move.extruders.length)">
-			<v-alert color = "secondary" :value="true" type="info">
+			<v-alert tile color = "secondary" :value="true" type="info">
 				{{ $t('panel.status.noStatus') }}
 			</v-alert>
 		</v-card-text>

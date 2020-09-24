@@ -13,13 +13,13 @@ export function drawLegend(canvas, maxVisualizationZ, colorScheme) {
 	// Clear background
 	const context = canvas.getContext('2d');
 	context.rect(0, 0, canvas.width, canvas.height);
-	context.fillStyle = 'black';
+	context.fillStyle = 'white'; //black
 	context.fill();
 
 	// Put annotations above gradient
 	context.font = '14px Roboto,sans-serif';
 	context.textAlign = 'center';
-	context.fillStyle = 'white';
+	context.fillStyle = 'black'; //white
 	context.fillText(i18n.t('panel.heightmap.scale'), canvas.width / 2, 21);
 	context.fillText(`${maxVisualizationZ} mm`, canvas.width / 2, 44);
 	context.fillText(i18n.t('panel.heightmap.orMore'), canvas.width / 2, 60);
@@ -47,7 +47,7 @@ export function drawLegend(canvas, maxVisualizationZ, colorScheme) {
 	context.fillRect(canvas.width / 2 - 12, 66, 24, scaleHeight);
 
 	// Put annotation below gradient
-	context.fillStyle = 'white';
+	context.fillStyle = 'black'; //white
 	if (colorScheme === 'terrain') {
 		context.fillText(`${-maxVisualizationZ} mm`, canvas.width / 2, scaleHeight + 82);
 		context.fillText(i18n.t('panel.heightmap.orLess'), canvas.width / 2, scaleHeight + 98);

@@ -11,7 +11,7 @@ import i18n from '../../i18n'
 
 import { displayTime } from '../../plugins/display.js'
 import { log, logCode } from '../../plugins/logging.js'
-import { makeFileTransferNotification, showMessage } from '../../plugins/toast.js'
+import { makeFileTransferNotification,  } from '../../plugins/toast.js'
 
 import beep from '../../utils/beep.js'
 import { DisconnectedError, CodeBufferError, InvalidPasswordError, OperationCancelledError } from '../../utils/errors.js'

@@ -3,9 +3,9 @@ span {
 	cursor: default;
 }
 
-a:link {
+/* a:link {
     text-decoration: none;
-}
+} */
 
 </style>
 

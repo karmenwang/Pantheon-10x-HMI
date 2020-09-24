@@ -1,5 +1,5 @@
 <template>
-	<v-row dense>
+	<v-row dense >
 		<v-col cols="12" class="d-flex">
 			<span>{{ printStatus }}</span>
 			<v-spacer></v-spacer>
