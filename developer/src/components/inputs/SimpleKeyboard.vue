@@ -1,22 +1,51 @@
 
 
 <style scoped>
-.simple-keyboard .hg-button.emptySpace {
-  pointer-events: none;
+
+.keyboardContainer {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  /* height:250px; */
+}
+
+.numPad {
+  margin-left:5px;
+  display: flex;
+}
+
+.simple-keyboard.hg-theme-default {
+  display: inline-block;
+}
+.simple-keyboard-numpad.simple-keyboard .hg-button{
+  height:60px !important;
+  width: 50px;
+}
+
+.simple-keyboard-main.simple-keyboard {
+  background-color:transparent;
+  color: #444444;
+}
+
+.simple-keyboard-numpad.simple-keyboard {
   background-color: transparent;
-  border: none;
-  box-shadow: none;
+  width:250px;
+  color: #444444;
 }
-
-.simple-keyboard .hg-button.space{
-  max-width: 850px;
-}
-
-
 </style>
 
 <template>
-  <div :class="keyboardClass"></div>
+  <!-- <div :class="keyboardClass"></div> -->
+  <div class="keyboardContainer">
+    <div class="simple-keyboard-main"></div>
+
+    <div class="numPad">
+      <div class="simple-keyboard-numpad"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -26,52 +55,62 @@ import "simple-keyboard/build/css/index.css";
 export default {
   name: "SimpleKeyboard",
   props: {
-    keyboardClass: {
-      default: "simple-keyboard",
-      type: String
-    },
-    input: {
-      type: String
-    }
+    input: String,
   },
   data: () => ({
-    keyboard: null
+    keyboard: null,
+    keyboardNumpad: null
   }),
   mounted() {
-    this.keyboard = new Keyboard({
-        onChange: this.onChange,
-        onKeyPress: this.onKeyPress,
-        layoutName: "numbers",
-        mergeDisplay: true,
-        theme: "hg-theme-default hg-layout-default ",
-        layout: {
-            numbers: ["1 2 3", "4 5 6", "7 8 9", "{abc} 0 {bksp}"," {enter} "],
-            default:[
-              "q w e r t y u i o p",
-              "a s d f g h j k l",
-              "{shift} z x c v b n m {bksp}",
-              "{numbers} {space} {enter}"
-            ],
-            shift: [
-              "Q W E R T Y U I O P",
-              "A S D F G H J K L",
-              "{shift} Z X C V B N M {bksp}",
-              "{numbers} {space} {enter}"
-            ],
-        },
-        buttonTheme: [
-          {class: "hg-spacebar", buttons: "{space}"},
-          {class: "hg-numbers", buttons: "1 2 3 4 5 6 7 8 9 0 {abc} {enter} {bksp}"}
-        ],
-        display:{
+    let Options = {
+      disableButtonHold: true,
+      useMouseEvents:true,
+      onChange: this.onChange,
+      onKeyPress: this.onKeyPress,
+      layoutName: "default",
+      mergeDisplay: true,
+      theme: "hg-theme-default hg-layout-numeric simple-keyboard",
+      syncInstanceInputs: true,
+      physicalKeyboardHighlight: true,
+      debug: true,
+      display:{
           "{bksp}":"⌫",
           "{enter}": "enter ↵",
           "{abc}": "ABC",
           "{numbers}": "123",
-          "{shift}": "⇧",
-        }
+          "{shift}": "shift ⇧",
+      }
+    };
+    this.keyboard = new Keyboard(".simple-keyboard-main",{
+       ...Options,
+      layout: {
+        numbers: ["1 2 3", "4 5 6", "7 8 9", "{abc} 0 {bksp}"," {enter} "], //number keyboard not used but I want to keep the code here for future uses
+        default:[
+          "q w e r t y u i o p {bksp}",
+          "a s d f g h j k l {enter}",
+          "{shift} z x c v b n m",
+          "{space}"
+        ],
+        shift: [
+          "Q W E R T Y U I O P {bksp}",
+          "A S D F G H J K L {enter}",
+          "{shift} Z X C V B N M",
+          "{space}"
+        ],
+      }
     });
-    this.keyboard.setInput(this.input);
+    
+    this.keyboardNumPad = new Keyboard(".simple-keyboard-numpad",{
+      ...Options,
+      layout:{
+        default:[
+          "{numpad7} {numpad8} {numpad9}",
+          "{numpad4} {numpad5} {numpad6}",
+          "{numpad1} {numpad2} {numpad3}",
+          "_ 0 {enter}"
+        ]
+      }
+    });
     console.log("input", this.input); //debugging tool
   },
   methods: {
@@ -81,7 +120,7 @@ export default {
     onKeyPress(button) {
       this.$emit("onKeyPress", button);
       if (button === "{shift}") this.handleShift();
-      if (button === "{numbers}" || button === "{abc}") this.handleNumbers();
+      //if (button === "{numbers}" || button === "{abc}") this.handleNumbers();
     },
     handleShift() {
       let currentLayout = this.keyboard.options.layoutName;
@@ -89,12 +128,12 @@ export default {
 
       this.keyboard.setOptions({layoutName: shiftToggle});
     },
-    handleNumbers() {
-      let currentLayout = this.keyboard.options.layoutName;
-      let numbersToggle = currentLayout !== "numbers" ? "numbers" : "default";
+    // handleNumbers() {
+    //   let currentLayout = this.keyboard.options.layoutName;
+    //   let numbersToggle = currentLayout !== "numbers" ? "numbers" : "default";
 
-      this.keyboard.setOptions({layoutName: numbersToggle});
-    }
+    //   this.keyboard.setOptions({layoutName: numbersToggle});
+    // }
   },
   watch: {
     input(input) {

@@ -3,6 +3,7 @@
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 	min-width: 0;
+	font-size: 1.05rem !important;
 }
 </style>
 
@@ -50,9 +51,9 @@
 						<v-list-item @click="sendCode('G29')">
 							<v-icon class="mr-1">mdi-grid</v-icon> {{ $t('panel.movement.runMesh') }}
 						</v-list-item>
-						<v-list-item @click="showMeshEditDialog = true">
+						<!-- <v-list-item @click="showMeshEditDialog = true">
 							<v-icon class="mr-1">mdi-pencil</v-icon> {{ $t('panel.movement.editMesh') }}
-						</v-list-item>
+						</v-list-item> -->
 						<v-list-item @click="sendCode('G29 S1')">
 							<v-icon class="mr-1">mdi-content-save</v-icon> {{ $t('panel.movement.loadMesh') }}
 						</v-list-item>
@@ -83,7 +84,7 @@
 				</template>
 			</v-row>
 
-			<v-row v-for="(axis, axisIndex) in visibleAxes" :key="axisIndex" > <!--dense-->
+			<v-row v-for="(axis, axisIndex) in visibleAxes" :key="axisIndex"> <!--dense-->
 				<!-- Regular home buttons -->
 				<v-col v-if="!isDelta" cols="auto" class="flex-shrink-1 hidden-sm-and-down">
 					<code-btn :color="axis.homed ? 'primary' : 'secondary'" :disabled="uiFrozen" :title="$t('button.home.title', [axis.letter])" :code="`G28 ${axis.letter}`" class="ml-0">
@@ -117,7 +118,8 @@
 		</v-card-text>
 
 		<mesh-edit-dialog :shown.sync="showMeshEditDialog"></mesh-edit-dialog>
-		<input-dialog :shown.sync="moveStepDialog.shown" :title="$t('dialog.changeMoveStep.title')" :prompt="$t('dialog.changeMoveStep.prompt')" :preset="moveStepDialog.preset" is-numeric-value @confirmed="moveStepDialogConfirmed"></input-dialog>
+		<!-- <input-dialog :shown.sync="moveStepDialog.shown" :title="$t('dialog.changeMoveStep.title')" :prompt="$t('dialog.changeMoveStep.prompt')" :preset="moveStepDialog.preset" is-numeric-value @confirmed="moveStepDialogConfirmed"></input-dialog> -->
+		<keyboard-dialog :shown.sync="moveStepDialog.shown" :title="$t('dialog.changeMoveStep.title')" :prompt="$t('dialog.changeMoveStep.prompt')" is-numeric-value @confirmed="moveStepDialogConfirmed"> </keyboard-dialog>
 
 		<v-alert tile color = "error" :value="unhomedAxes.length !== 0" type="warning" class="mb-0">
 			{{ $tc('panel.movement.axesNotHomed', unhomedAxes.length) }}

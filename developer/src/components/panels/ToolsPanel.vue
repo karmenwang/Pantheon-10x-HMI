@@ -24,14 +24,14 @@ table.extra tr > td:first-child {
 	width: 50%;
 }
 
-table tr{
-	height: 50px;
+.currentTemp{
+	font-size:20px;
 }
 
 </style>
 
 <template>
-	<v-card outlined  height="100%">
+	<v-card outlined height="100%">
 		<v-card-title class="py-3">
 			<v-icon small>mdi-wrench</v-icon> {{ $t('panel.tools.caption') }}
 			<!-- <panel-link :active="currentPage !== 'tools'" @click="currentPage = 'tools'" class="mr-2">
@@ -66,9 +66,9 @@ table tr{
 		</v-card-title>
 		<v-divider></v-divider>
 
-		<v-card-text class="pa-0">
+		<v-card-text class="pa-0" style="height: 80%;">
 			<template v-if="currentPage === 'tools'">
-				<table class="tools pt-3" v-show="canShowTools">
+				<table class="tools pt-3" v-show="canShowTools" style="height:100%;">
 					<thead>
 						<th class="pl-2">{{ $t('panel.tools.tool', ['']) }}</th>
 						<th class="px-1">{{ $t('panel.tools.heater', ['']) }}</th>
@@ -78,9 +78,10 @@ table tr{
 					</thead>
 					<tbody>
 						<!-- Tools -->
-						<template v-for="(tool, toolIndex) in visibleTools">
+						<template v-for="(tool, toolIndex) in visibleTools" >
 							<!-- Tool -->
-							<tr v-for="(toolHeater, toolHeaterIndex) in getToolHeaters(tool)" :key="`tool-${toolIndex}-${toolHeaterIndex}`" :class="{ [selectedToolClass] : (tool.number === state.currentTool) }">
+							<tr v-for="(toolHeater, toolHeaterIndex) in getToolHeaters(tool)" :key="`tool-${toolIndex}-${toolHeaterIndex}`" 
+							:class="{ [selectedToolClass] : (tool.number === state.currentTool) }">
 								<!-- Tool Name -->
 								<th v-if="toolHeaterIndex === 0" :rowspan="Math.max(1, tool.heaters.length)" class="pl-2" :class="{ 'pt-2 pb-2' : !tool.heaters.length && !toolHeater }">
 									<a href="javascript:void(0)" @click="toolClick(tool)">
@@ -159,12 +160,12 @@ table tr{
 									</th>
 
 									<!-- Heater value -->
-									<td>
+									<td class="currentTemp">
 										{{ getHeaterValue(toolHeater) }}
 									</td>
 
 									<!-- Heater active -->
-									<td class="pl-2 pr-2">
+									<td class="px-2">
 										<tool-input :tool="tool" :tool-heater-index="toolHeaterIndex" active></tool-input>
 									</td>
 
@@ -220,12 +221,12 @@ table tr{
 									</th>
 
 									<!-- Heater value -->
-									<td>
+									<td class="currentTemp">
 										{{ getHeaterValue(bedHeater) }}
 									</td>
 
 									<!-- Heater active -->
-									<td class="pl-2 pr-2">
+									<td class="px-2">
 										<tool-input :bed="bedHeater" :bed-index="bedIndex" active></tool-input>
 									</td>
 
@@ -270,7 +271,7 @@ table tr{
 									</th>
 
 									<!-- Heater value -->
-									<td>
+									<td class="currentTemp">
 										{{ getHeaterValue(chamberHeater) }}
 									</td>
 

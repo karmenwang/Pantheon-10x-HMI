@@ -20,20 +20,20 @@
 					</template>
 				</v-combobox> -->
 
-				<v-text-field outlined dense :loading="doingCode"
-					color="secondary" v-model="code" step="any" min="0" :label="$t('input.code.placeholder')"
+				<v-text-field outlined dense :disabled="uiFrozen" :loading="doingCode" ref="input"
+					color="secondary" v-model="code" :label="$t('input.code.placeholder')"
 					hide-details @click.stop = "editConsoleCommand">
 				</v-text-field>
-				<span>{{code}}</span>
+				<!-- <span>{{code}}</span> -->
 			</v-col>
 
 			<v-col class="ml-2 flex-shrink-1" cols="auto">
-				<v-btn large depressed color="secondary" :disabled="uiFrozen" :loading="doingCode" @click="doSend">
+				<v-btn :disabled="uiFrozen" large depressed color="secondary" :loading="doingCode" @click="doSend">
 					<v-icon class="mr-2">mdi-send</v-icon> {{ $t('input.code.send') }} 
 				</v-btn>
 				</v-col>
 			</v-row>
-		<numerical-keyboard-dialog :shown.sync ="editConsoleCommandDialog.shown" :title="$t('dialog.editConsoleCommand.title')" @confirmed="setConsoleCommand"></numerical-keyboard-dialog>
+		<keyboard-dialog :shown.sync ="editConsoleCommandDialog.shown" :title="$t('dialog.editConsoleCommand.title')" :prompt="$t('dialog.editConsoleCommand.prompt')" @confirmed="setConsoleCommand"></keyboard-dialog>
 	</v-card>
 </template>
 

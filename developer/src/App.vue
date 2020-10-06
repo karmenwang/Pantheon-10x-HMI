@@ -43,9 +43,9 @@ input::-webkit-inner-spin-button {
 	text-decoration: none;
 } */
 
-textarea {
+/* textarea {
 	line-height: 1.25rem !important;
-}
+} */
 
 .theme--dark textarea {
 	caret-color: #FFF;
@@ -65,12 +65,14 @@ textarea {
 }
 
 .v-card__text{
-	font-size: 1rem;
+	font-size: 1rem; 
 }
 
 .v-list-item__title{
-	font-size: 1.1rem;
+	font-size: 1.3rem;	/*Navigation Bar Text*/
+	font-weight:500;
 }
+
 
 html {
   overflow: hidden !important;
@@ -87,31 +89,33 @@ html {
 	border-radius: 0px 0px 3px 3px;
 }
 
-
 </style>
 
 <template>
 	<v-app> 
-		<v-navigation-drawer v-model="drawer" clipped fixed permanent touchless app width="300" >
-			<div class="pa-2 hidden-sm-and-up " > 
+		<v-navigation-drawer v-model="drawer" clipped fixed permanent touchless app width="300">
+			<div class="pa-2 hidden-sm-and-up" > 
 				<connect-btn v-if="isLocal" class="mb-3" block></connect-btn>
 				<emergency-btn block></emergency-btn>
 			</div>
 
-			<v-list class="pt-0" :expand="$vuetify.breakpoint.mdAndUp">
-				<v-list-group v-for="(category, index) in routing" :key="index" :prepend-icon="category.icon" no-action :value="isExpanded(category)">
-					<template #activator>
-						<v-list-item-title>{{ $t(category.caption) }}</v-list-item-title>
-					</template>
-
-					<v-list-item v-for="(page, pageIndex) in category.pages.filter(page => checkMenuCondition(page.condition))" :key="`${index}-${pageIndex}`" v-ripple :to="page.path" @click.prevent="">
-						<v-list-item-icon>
-							<v-icon>{{ page.icon }}</v-icon>
-						</v-list-item-icon>
-						<v-list-item-title>{{ $t(page.caption) }}</v-list-item-title>
+			<v-list class="pt-0" :expand="$vuetify.breakpoint.mdAndUp" two-line>
+				<div v-for="(category, index) in routing" :key="index">
+					<v-list-item v-for="(page, pageIndex) in category.pages.filter(page => checkMenuCondition(page.condition))" 
+						:key="`${index}-${pageIndex}`" v-ripple :to="page.path" @click.prevent="" color="primary">
+						<!-- <v-list-item-icon> -->
+						<v-row>
+							<v-col class="col-2">
+								<v-icon>{{ page.icon }}</v-icon>
+							</v-col>
+						<!-- </v-list-item-icon> -->
+							<v-col class="col-10">
+								<v-list-item-title>{{ $t(page.caption) }}</v-list-item-title>
+							</v-col>
+						</v-row>
 					</v-list-item>
-					<v-divider></v-divider>
-				</v-list-group>
+					<!-- <v-divider></v-divider> -->
+				</div>
 				<!-- <v-list-group v-for="(category, index) in routing" :key="index" :prepend-icon="category.icon" no-action :value="isExpanded(category)">
 					<template #activator>
 						<v-list-item-title>{{ $t(category.caption) }}</v-list-item-title>
@@ -176,7 +180,7 @@ html {
 
 			<v-divider v-show="!hideGlobalContainer || $vuetify.breakpoint.mdAndUp"></v-divider>
 
-			<v-container fluid class="pt-2" fill-height align-content-start>
+			<v-container fluid class="pt-0" fill-height align-content-start>
 				<keep-alive>
 					<router-view></router-view>
 				</keep-alive>

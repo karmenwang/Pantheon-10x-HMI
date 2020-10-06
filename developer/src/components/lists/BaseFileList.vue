@@ -17,16 +17,12 @@ td {
 	white-space: nowrap;
 }
 
-.v-data-footer__select{
-	visibility: hidden;
-}
-
 </style>
 
 <template >
 	<div>
-		<v-data-table v-model="innerValue" v-bind="$props" fixed-header :items-per-page="8"
-			:items="innerFilelist" item-key="name" :headers="headers || defaultHeaders" show-select 
+		<v-data-table v-model="innerValue" v-bind="$props" fixed-header :items-per-page="6" :page.sync="page" hide-default-footer @page-count="pageCount = $event"
+			:items="innerFilelist" item-key="name" :headers="headers || defaultHeaders" show-select height="450"
 			:loading="loading || innerLoading"
 			:custom-sort="sort" :sort-by.sync="internalSortBy" :sort-desc.sync="internalSortDesc" must-sort
 			:mobile-breakpoint="0"
@@ -47,51 +43,55 @@ td {
 			</template>
 
 			<template #item="props">
-				<tr v-ripple :active="props.isSelected" @keydown.space.prevent="props.select(!props.isSelected)"
-					@touchstart="onItemTouchStart(props, $event)" @touchend="onItemTouchEnd"
-					@click="onItemClick(props)" @keydown.enter.prevent="onItemClick(props)"
-					@contextmenu.prevent="onItemContextmenu(props, $event)" @keydown.escape.prevent="contextMenu.shown = false"
-					@dragstart="onItemDragStart(props.item, $event)" @dragover="onItemDragOver(props.item, $event)" @drop.prevent="onItemDragDrop(props.item, $event)"
-					:data-filename="(props.item.isDirectory ? '*' : '') + props.item.name" draggable="true" tabindex="0">
+					<tr :active="props.isSelected" @keydown.space.prevent="props.select(!props.isSelected)" height="60px"
+						@touchstart="onItemTouchStart(props, $event)" @touchend="onItemTouchEnd" 
+						@click="onItemClick(props)" @keydown.enter.prevent="onItemClick(props)"
+						@contextmenu.prevent="onItemContextmenu(props, $event)" @keydown.escape.prevent="contextMenu.shown = false"
+						@dragstart="onItemDragStart(props.item, $event)" @dragover="onItemDragOver(props.item, $event)" @drop.prevent="onItemDragDrop(props.item, $event)"
+						:data-filename="(props.item.isDirectory ? '*' : '') + props.item.name" draggable="true" tabindex="0">
 
-					<td v-for="header in props.headers" :key="header.value" :class="{ 'pr-0': header.value === 'data-table-select' }">
-						<template v-if="header.value === 'data-table-select'">
-							<v-checkbox :input-value="props.isSelected" @touchstart.stop="" @touchend.stop="" @click.stop.prevent="props.select(!props.isSelected)" primary hide-details class="mt-n1" tabindex="-1"></v-checkbox>
-						</template>
-						<template v-else-if="header.value === 'name'">
-							<div class="d-inline-flex align-center">
-								<slot :name="`${props.item.isDirectory ? 'folder' : 'file'}.${props.item.name}`">
-									<v-icon class="mr-1">{{ props.item.isDirectory ? folderIcon : fileIcon }}</v-icon> {{ props.item.name }}
-								</slot>
-							</div>
-						</template>
-						<template v-else-if="header.unit === 'bytes'">
-							{{ (props.item[header.value] !== null) ? $displaySize(props.item[header.value]) : '' }}
-						</template>
-						<template v-else-if="header.unit === 'date'">
-							{{ props.item.lastModified ? props.item.lastModified.toLocaleString() : $t('generic.noValue') }}
-						</template>
-						<template v-else-if="header.unit === 'filaments'">
-							<v-tooltip bottom :disabled="!props.item[header.value] || props.item[header.value].length <= 1">
-								<template #activator="{ on }">
-									<span v-on="on">
-										{{ displayLoadingValue(props.item, header.value, 1, 'mm') }}
-									</span>
-								</template>
+						<td v-for="header in props.headers" :key="header.value" :class="{ 'pr-0': header.value === 'data-table-select' }">
+							<template v-if="header.value === 'data-table-select'">
+								<v-checkbox :input-value="props.isSelected" @touchstart.stop="" @touchend.stop="" @click.stop.prevent="props.select(!props.isSelected)" primary hide-details class="mt-n1" tabindex="-1"></v-checkbox>
+							</template>
+							<template v-else-if="header.value === 'name'">
+								<div class="d-inline-flex align-center">
+									<slot :name="`${props.item.isDirectory ? 'folder' : 'file'}.${props.item.name}`">
+										<v-icon class="mr-1">{{ props.item.isDirectory ? folderIcon : fileIcon }}</v-icon> {{ props.item.name }}
+									</slot>
+								</div>
+							</template>
+							<template v-else-if="header.unit === 'bytes'">
+								{{ (props.item[header.value] !== null) ? $displaySize(props.item[header.value]) : '' }}
+							</template>
+							<template v-else-if="header.unit === 'date'">
+								{{ props.item.lastModified ? props.item.lastModified.toLocaleString() : $t('generic.noValue') }}
+							</template>
+							<template v-else-if="header.unit === 'filaments'">
+								<v-tooltip bottom :disabled="!props.item[header.value] || props.item[header.value].length <= 1">
+									<template #activator="{ on }">
+										<span v-on="on">
+											{{ displayLoadingValue(props.item, header.value, 1, 'mm') }}
+										</span>
+									</template>
 
-								{{ $display(props.item[header.value], 1, 'mm') }}
-							</v-tooltip>
-						</template>
-						<template v-else-if="header.unit === 'time'">
-							{{ displayTimeValue(props.item, header.value) }}
-						</template>
-						<template v-else>
-							{{ displayLoadingValue(props.item, header.value, header.precision, header.unit) }}
-						</template>
-					</td>
-				</tr>
+									{{ $display(props.item[header.value], 1, 'mm') }}
+								</v-tooltip>
+							</template>
+							<template v-else-if="header.unit === 'time'">
+								{{ displayTimeValue(props.item, header.value) }}
+							</template>
+							<template v-else>
+								{{ displayLoadingValue(props.item, header.value, header.precision, header.unit) }}
+							</template>
+						</td>
+					</tr>
 			</template>
 		</v-data-table>
+
+		<div class="text-center pt-2">
+				<v-pagination v-model="page" :length="pageCount" color="secondary"></v-pagination>
+		</div>
 
 		<v-menu v-model="contextMenu.shown" :position-x="contextMenu.x" :position-y="contextMenu.y" absolute offset-y>
 			<v-list>
@@ -100,8 +100,11 @@ td {
 				<v-list-item v-show="!noDownload && innerValue.length === 1 && filesSelected" @click="download">
 					<v-icon class="mr-1">mdi-cloud-download</v-icon> {{ $tc('list.baseFileList.download', innerValue.length) }}
 				</v-list-item>
-				<v-list-item v-show="!noEdit && innerValue.length === 1 && filesSelected" :disabled="!canEditFile" @click="edit(innerValue[0])">
+				<!-- <v-list-item v-show="!noEdit && innerValue.length === 1 && filesSelected" :disabled="!canEditFile" @click="edit(innerValue[0])">
 					<v-icon class="mr-1">mdi-file-document-edit</v-icon> {{ $t('list.baseFileList.edit') }}
+				</v-list-item> -->
+				<v-list-item v-show="!noMoveFile" @click="move">
+					<v-icon class="mr-1">mdi-folder-move</v-icon> {{ $t('list.baseFileList.move') }}
 				</v-list-item>
 				<v-list-item v-show="!noRename && innerValue.length === 1" @click="rename">
 					<v-icon class="mr-1">mdi-rename-box</v-icon> {{ $t('list.baseFileList.rename') }}
@@ -115,8 +118,41 @@ td {
 			</v-list>
 		</v-menu>
 
-		<file-edit-dialog :shown.sync="editDialog.shown" :filename="editDialog.filename" v-model="editDialog.content" @editComplete="$emit('fileEdited', $event)"></file-edit-dialog>
-		<input-dialog :shown.sync="renameDialog.shown" :title="$t('dialog.renameFile.title')" :prompt="$t('dialog.renameFile.prompt')" :preset="renameDialog.item && renameDialog.item.name" @confirmed="renameCallback"></input-dialog>
+		<v-menu v-model="moveMenu.shown" :close-on-content-click="false" :position-x="contextMenu.x" :position-y="contextMenu.y" absolute offset-y>
+			<v-card>
+				<v-card-title>
+					Put directory path here idk how to do it tho lol
+				</v-card-title>
+				<v-card-text class="pa-0">
+					<v-list dense >
+						<v-list-item-group v-model="selectedFolder" color="secondary" >
+								<!-- <div v-for="(folder) in innerFilelist" :key="folder">
+									<v-list-item v-if="folder.isDirectory">
+											<v-icon class="mr-1">mdi-folder</v-icon>{{folder.name}}
+									</v-list-item>
+								</div> -->
+								<div v-for="(folder) in showDirectories" :key="folder">
+									<v-list-item >
+											<v-icon class="mr-1">mdi-folder</v-icon>{{folder.name}}
+									</v-list-item>
+								</div>
+						</v-list-item-group>
+						<!-- <v-list-item>{{displaySelectedDirectory}}</v-list-item> -->
+					</v-list>
+					<span>{{showDirectories[selectedFolder]}}</span>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="moveMenu.shown = false"> Cancel </v-btn>
+					<v-btn color="primary" text @click="moveHere"> Move Here </v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-menu>
+
+		<!-- <file-edit-dialog :shown.sync="editDialog.shown" :filename="editDialog.filename" v-model="editDialog.content" @editComplete="$emit('fileEdited', $event)"></file-edit-dialog> -->
+		<keyboard-dialog :shown.sync="renameDialog.shown" :title="$t('dialog.renameFile.title')" :prompt="$t('dialog.renameFile.prompt')" @confirmed="renameCallback"></keyboard-dialog>
+		
+		<!-- <input-dialog :shown.sync="renameDialog.shown" :title="$t('dialog.renameFile.title')" :prompt="$t('dialog.renameFile.prompt')" :preset="renameDialog.item && renameDialog.item.name" @confirmed="renameCallback"></input-dialog> -->
 	</div>
 </template>
 
@@ -166,7 +202,8 @@ export default {
 			default: ''
 		},
 		noRename: Boolean,
-		noDelete: Boolean
+		noDelete: Boolean,
+		noMoveFile: Boolean,
 	},
 	computed: {
 		...mapState(['selectedMachine']),
@@ -222,10 +259,16 @@ export default {
 			set(value) {
 				this.setSorting({ table: this.sortTable, column: this.internalSortBy, descending: value });
 			}
+		},
+		showDirectories(){
+			return this.innerFilelist.filter(item => item.isDirectory===true);
 		}
 	},
 	data() {
 		return {
+			selectedFolder:'',
+			page:1,
+			pageCount:0,
 			unsubscribe: undefined,
 			wasMounted: false,
 			initialDirectory: this.directory,
@@ -250,6 +293,9 @@ export default {
 				shown: false,
 				directory: '',
 				item: null
+			},
+			moveMenu:{
+				shown: false,
 			}
 		}
 	},
@@ -265,6 +311,11 @@ export default {
 		toggleAll() {
 			this.innerValue = this.innerValue.length ? [] : this.innerFilelist.slice();
 		},
+
+		checkMove: function(e) {
+			window.console.log("Future index: " + e.draggedContext.futureIndex);
+		},
+
 		sort(items, sortBy, sortDesc) {
 			sortBy = sortBy.length ? sortBy[0] : 'name';
 			sortDesc = sortDesc[0];
@@ -304,9 +355,9 @@ export default {
 			await this.loadDirectory(this.innerDirectory);
 		},
 		async loadDirectory(directory) {
-			if (!this.isConnected) {
-				return;
-			}
+			// if (!this.isConnected) {
+			// 	return;
+			// }
 
 			// Update our path even if we're still busy loading
 			this.innerDirectory = directory;
@@ -326,7 +377,6 @@ export default {
 			this.innerLoading = true;
 			try {
 				const files = await this.getFileList(directory);
-
 				// Create missing props if required
 				if (this.headers) {
 					files.forEach(function(item) {
@@ -639,6 +689,28 @@ export default {
 				this.$makeNotification('error', this.$t('notification.compress.errorTitle'), e.message);
 			}
 			notification.hide();
+		},
+		async move(){
+			this.moveMenu.shown=true;
+			this.contextMenu.shown=false;
+		},
+
+		async moveHere(selectedMoveFile){ //selectedMoveFile,selectedMoveFolder
+			this.moveMenu.shown=false;
+			selectedMoveFile = this.innerValue;
+			const selectedMoveFolder = this.showDirectories[this.selectedFolder]
+			
+			if (selectedMoveFile === 'dwcFiles' && !( selectedMoveFile.isDirectory && selectedMoveFile.name === selectedMoveFolder.name)) {
+				const directory = this.innerDirectory;
+				const from = Path.combine(selectedMoveFile.directory, selectedMoveFolder.name);
+				const to = Path.combine(directory, selectedMoveFolder.name, selectedMoveFile.name);
+				try {
+					await this.machineMove({ from, to });
+				} 
+				catch (e) {
+					this.$makeNotification('error', `Failed to move ${selectedMoveFile.name} to ${directory}`, e.message);
+				}
+			}
 		}
 	},
 	mounted() {

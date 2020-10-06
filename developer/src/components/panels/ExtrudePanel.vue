@@ -30,7 +30,7 @@
 						{{ $t('panel.extrude.amount', ['mm']) }}
 						</p>
 						<v-text-field class = "pl-2" color="secondary" v-model = "amount" placeholder = "Enter amount" type="number" read-only @click = "editAmount(0)" required ></v-text-field>
-						<span>debugging {{amount}}</span> 
+						<!-- <span>debugging {{amount}}</span>  -->
 						<!-- <v-btn-toggle v-model="amount" mandatory class="d-flex">
 							<v-btn v-for="(savedAmount, index) in extruderAmounts" :key="index" :value="savedAmount" :disabled="uiFrozen" @contextmenu.prevent="editAmount(index)" class="flex-grow-1">
 								{{ savedAmount }}
@@ -42,7 +42,7 @@
 						{{ $t('panel.extrude.feedrate', ['mm/s']) }}
 						</p>
 						<v-text-field color="secondary" v-model = "feedrate" placeholder = "Enter rate" type="number" read-only @click = "editFeedrate(0)" required ></v-text-field>
-						<span>debugging {{feedrate}}</span>
+						<!-- <span>debugging {{feedrate}}</span> -->
 						<!-- <v-btn-toggle v-model="feedrate" mandatory class="d-flex">
 							<v-btn v-for="(savedFeedrate, index) in extruderFeedrates" :key="index" :value="savedFeedrate" :disabled="uiFrozen" @contextmenu.prevent="editFeedrate(index)" class="flex-grow-1">
 								{{ savedFeedrate }}
@@ -64,8 +64,8 @@
 				</v-row>
 			</v-card-text>
 		</div>
-		<numerical-keyboard-dialog is-numeric-value :shown.sync ="editAmountDialog.shown" :title="$t('dialog.editExtrusionAmount.title')" @confirmed="setAmount"></numerical-keyboard-dialog>
-		<numerical-keyboard-dialog is-numeric-value :shown.sync ="editFeedrateDialog.shown" :title="$t('dialog.editExtrusionFeedrate.title')" @confirmed="setFeedrate"></numerical-keyboard-dialog>
+		<keyboard-dialog is-numeric-value :shown.sync ="editAmountDialog.shown" :prompt="$t('dialog.editExtrusionAmount.prompt')" :title="$t('dialog.editExtrusionAmount.title')" @confirmed="setAmount"></keyboard-dialog>
+		<keyboard-dialog is-numeric-value :shown.sync ="editFeedrateDialog.shown" :prompt="$t('dialog.editExtrusionFeedrate.prompt')" :title="$t('dialog.editExtrusionFeedrate.title')" @confirmed="setFeedrate"></keyboard-dialog>
 		<!-- <input-dialog :shown.sync="editAmountDialog.shown" :title="$t('dialog.editExtrusionAmount.title')" :prompt="$t('dialog.editExtrusionAmount.prompt')" :preset="editAmountDialog.preset" is-numeric-value @confirmed="setAmount"></input-dialog> -->
 		<!-- <input-dialog :shown.sync="editFeedrateDialog.shown" :title="$t('dialog.editExtrusionFeedrate.title')" :prompt="$t('dialog.editExtrusionFeedrate.prompt')" :preset="editFeedrateDialog.preset" is-numeric-value @confirmed="setFeedrate"></input-dialog> -->
 	</v-card>
@@ -144,12 +144,12 @@ export default {
 			editAmountDialog: {
 				shown: false,
 				index: 0,
-				preset: 0
+				preset: 10
 			},
 			editFeedrateDialog: {
 				shown: false,
 				index: 0,
-				preset: 0
+				preset: 5
 			}
 		}
 	},

@@ -17,9 +17,9 @@
 			<v-text-field
 				color="secondary" v-model="timeout" type="number" step="any" min="0" 
 				:label="$t('panel.settingsNotifications.notificationTimeout', ['ms'])" hide-details @click.stop = "editNotificationTimeout"></v-text-field>
-			<span>{{settings.notifications.timeout}}</span>
+			<!-- <span>{{settings.notifications.timeout}}</span> -->
 		</v-card-text>
-		<numerical-keyboard-dialog :shown.sync ="editNotificationTimeoutDialog.shown" :title="$t('dialog.editNotificationTimeout.title')" is-numeric-value @confirmed="setNotificationTimeout"></numerical-keyboard-dialog>
+		<keyboard-dialog :shown.sync ="editNotificationTimeoutDialog.shown" :prompt="$t('dialog.editNotificationTimeout.prompt')" :title="$t('dialog.editNotificationTimeout.title')" is-numeric-value @confirmed="setNotificationTimeout"></keyboard-dialog>
 	</v-card>
 </template>
 

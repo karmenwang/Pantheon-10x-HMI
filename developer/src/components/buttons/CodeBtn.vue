@@ -1,3 +1,4 @@
+
 <template>
 	<v-btn depressed v-bind="$props" :disabled="$props.disabled || uiFrozen" :loading="waitingForCode" @click="click" @contextmenu="$emit('contextmenu', $event)" large>
 		<slot></slot>

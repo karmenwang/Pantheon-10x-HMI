@@ -1,5 +1,5 @@
 <template>
-	<v-breadcrumbs :items="pathItems" divider=">">
+	<v-breadcrumbs :items="pathItems" divider=">" large>
 		<template #item="props">
 			<v-breadcrumbs-item href="javascript:void(0)" :disabled="props.item.disabled" @click="changeDirectory(props.item.href)" @dragover="dragOver(props.item.href, $event)" @drop.prevent="dragDrop(props.item.href, $event)">
 				{{ props.item.text }}

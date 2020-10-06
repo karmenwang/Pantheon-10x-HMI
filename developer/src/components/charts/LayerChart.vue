@@ -10,7 +10,7 @@
 </style>
 
 <template>
-	<v-card class="d-flex flex-column flex-grow-1" outlined>
+	<v-card class="d-flex flex-column flex-grow-1" outlined height="375">
 		<v-card-title>
 			<span>
 				<v-icon small class="mr-1">mdi-vector-polyline</v-icon> {{ $t('chart.layer.caption') }}

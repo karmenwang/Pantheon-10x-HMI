@@ -7,7 +7,7 @@
 		</v-col>
 
 		<v-col cols="12">
-			<v-progress-linear :value="jobProgress * 100" class="my-1"></v-progress-linear>
+			<v-progress-linear :value="jobProgress * 100" class="mt-1"></v-progress-linear>
 		</v-col>
 	</v-row>
 </template>

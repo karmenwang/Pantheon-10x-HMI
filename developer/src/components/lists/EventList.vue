@@ -9,14 +9,16 @@ td.title-cell {
 	vertical-align: top;
 }
 
+.v-data-footer{
+	font-size:1rem;
+}
+
 .v-data-footer__select{
 	visibility: hidden;
 }
 
-.header-title-style th{
-	background-color: #666666;
-	/* font-size: 0.85rem; */
-	border-radius: 3px 3px 0px 0px;
+.v-data-table th{
+	font-size:1rem;
 }
 </style>
 
@@ -35,9 +37,8 @@ th:last-child {
 <template>
 	<div class="component">
 		<v-data-table
-			:headers="headers" :items="events" item-key="date" fixed-header
-			:items-per-page="6" :mobile-breakpoint="0"
-			:custom-sort="sort" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" must-sort
+			:headers="headers" :items="events" item-key="date" fixed-header :items-per-page="4" :page.sync="page" hide-default-footer @page-count="pageCount = $event"
+			:mobile-breakpoint="0" :custom-sort="sort" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" must-sort height="450"
 			class="elevation-0" :class="{ 'empty-table-fix' : !events.length }">
 
 			<template #no-data>
@@ -70,7 +71,7 @@ th:last-child {
 
 			<template #item="{ item }">
 				<!-- <tr :class="getClassByEvent(item.type)"> -->
-				<tr>
+				<tr height="70px">
 					<td class="log-cell title-cell">
 						{{ item.date.toLocaleString() }}
 					</td>
@@ -90,6 +91,9 @@ th:last-child {
 				</tr>
 			</template>
 		</v-data-table>
+		<div class="text-center pt-2">
+				<v-pagination v-model="page" :length="pageCount" color="secondary"></v-pagination>
+		</div>
 	</div>
 </template>
 
@@ -102,6 +106,12 @@ import saveAs from 'file-saver'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
+	data(){
+		return{ 
+			page:1,
+			pageCount:0,
+		}
+	},
 	computed: {
 		...mapState('machine', ['events']),
 		...mapState('machine/cache', ['sorting']),

@@ -67,7 +67,7 @@ export default {
 		},
 		home: {
 			caption: 'Home {0}',
-			captionAll: 'Home All',
+			captionAll: 'Home All Axis',
 			title: 'Home the {0} axis (G28 {0})',
 			titleAll: 'Home all axes (G28)'
 		},
@@ -169,18 +169,20 @@ export default {
 			standBy: 'Please stand by...'
 		},
 		editConsoleCommand:{
-			title: 'Send Gcode command'
+			title: 'Send Gcode command',
+			prompt:'Please enter command:'
 		},
 		editExtrusionAmount: {
 			title: 'Edit extrusion amount',
-			prompt: 'Please enter a new amount for the clicked button:'
+			prompt: 'Please enter a new amount:'
 		},
 		editExtrusionFeedrate: {
 			title: 'Edit extrusion feedrate',
-			prompt: 'Please enter a new feedrate for the clicked button:'
+			prompt: 'Please enter a new feedrate:'
 		},
 		editNotificationTimeout:{
 			title: 'Edit notification timeout',
+			prompt:'Please enter a new timeout:'
 		},
 		factoryReset: {
 			title: 'Perform factory reset?',
@@ -357,6 +359,7 @@ export default {
 			lastModified: 'Last modified',
 			download: 'Download File',
 			edit: 'Edit File',
+			move: 'Move to',
 			rename: 'Rename',
 			delete: 'Delete',
 			downloadZIP: 'Download as ZIP',
@@ -411,13 +414,13 @@ export default {
 		},
 		job: {
 			caption: 'Current Job',
-			status: 'Status',
+			status: 'Job Status',
 			webcam: 'Webcam',
 			visualiser: 'Visualiser'
 		},
 		files: {
 			caption: 'File Management',
-			jobs: 'Jobs',
+			jobs: 'Job Files',
 			filaments: 'Filaments',
 			macros: 'Macros',
 			menu: 'Display',
@@ -568,7 +571,7 @@ export default {
 			jobDuration: 'Job Duration'
 		},
 		jobEstimations: {
-			caption: 'Estimations based on',
+			caption: 'Estimations',
 			filament: 'Filament Usage',
 			file: 'File Progress',
 			layer: 'Layer Time',

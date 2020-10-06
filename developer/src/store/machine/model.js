@@ -273,13 +273,13 @@ export const DefaultMachineModel = new MachineModel({
 			standby: [0],
 			heaters: [1],
 			extruders: [0]
-		}),
-		new Tool({
-			number: 1,
-			active: [0],
-			standby: [0],
-			heaters: [2],
-			extruders: [1]
+		// }),
+		// new Tool({
+		// 	number: 1,
+		// 	active: [0],
+		// 	standby: [0],
+		// 	heaters: [2],
+		// 	extruders: [1]
 		})
 	]
 })

@@ -20,7 +20,7 @@ tr:nth-of-type(even) {
 
 			<v-spacer></v-spacer>
 
-			<v-btn large depressed color="primary" class="hidden-sm-and-down mr-3" :disabled="uiFrozen" @click="showNewDirectory = true"> <!--:disabled="uiFrozen"-->
+			<v-btn large depressed color="primary" class="hidden-sm-and-down mr-3" @click="showNewDirectory = true"> <!--:disabled="uiFrozen"-->
 				<v-icon class="mr-1">mdi-folder-plus</v-icon> {{ $t('button.newDirectory.caption') }}
 			</v-btn>
 			<v-btn large depressed color= "primary" class="hidden-sm-and-down mr-3" :loading="loading || fileinfoProgress !== -1" :disabled="uiFrozen" @click="refresh">

@@ -1,5 +1,6 @@
 <template>
-	<input-dialog :shown.sync="innerShown" :title="title || $t('dialog.newDirectory.title')" :prompt="prompt || $t('dialog.newDirectory.prompt')" @confirmed="createDirectory"></input-dialog>
+	<!-- <input-dialog :shown.sync="innerShown" :title="title || $t('dialog.newDirectory.title')" :prompt="prompt || $t('dialog.newDirectory.prompt')" @confirmed="createDirectory"></input-dialog> -->
+	<keyboard-dialog :shown.sync="innerShown" :title="title || $t('dialog.newDirectory.title')" :prompt="prompt || $t('dialog.newDirectory.prompt')" @confirmed="createDirectory"></keyboard-dialog>
 </template>
 
 <script>
