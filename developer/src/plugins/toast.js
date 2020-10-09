@@ -44,6 +44,7 @@ export function makeNotification(type, title, message, timeout) {
 
 	switch (type) {
 		case 'info':
+			iziToast.info(options);
 			break;
 		case 'success':
 			iziToast.success(options);
