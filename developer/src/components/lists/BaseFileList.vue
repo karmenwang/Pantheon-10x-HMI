@@ -121,26 +121,23 @@ td {
 		<v-menu v-model="moveMenu.shown" :close-on-content-click="false" :position-x="contextMenu.x" :position-y="contextMenu.y" absolute offset-y>
 			<v-card>
 				<v-card-title>
-					Put directory path here idk how to do it tho lol
+					{{ $t('list.baseFileList.moveFile') }}
 				</v-card-title>
+				<v-divider></v-divider>
 				<v-card-text class="pa-0">
 					<v-list dense >
 						<v-list-item-group v-model="selectedFolder" color="secondary" >
-								<!-- <div v-for="(folder) in innerFilelist" :key="folder">
-									<v-list-item v-if="folder.isDirectory">
-											<v-icon class="mr-1">mdi-folder</v-icon>{{folder.name}}
-									</v-list-item>
-								</div> -->
+								<v-list-item v-show ="this.innerDirectory !== this.initialDirectory">
+									<v-icon class="mr-1">mdi-folder</v-icon>Main
+								</v-list-item>
 								<div v-for="(folder) in showDirectories" :key="folder">
 									<v-list-item >
 											<v-icon class="mr-1">mdi-folder</v-icon>{{folder.name}}
 									</v-list-item>
 								</div>
 						</v-list-item-group>
-						<!-- <v-list-item>{{displaySelectedDirectory}}</v-list-item> -->
 					</v-list>
-					<span>{{showDirectories[selectedFolder]}}</span>
-				</v-card-text>
+					</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn text @click="moveMenu.shown = false"> Cancel </v-btn>
@@ -355,9 +352,9 @@ export default {
 			await this.loadDirectory(this.innerDirectory);
 		},
 		async loadDirectory(directory) {
-			// if (!this.isConnected) {
-			// 	return;
-			// }
+			if (!this.isConnected) {
+				return;
+			}
 
 			// Update our path even if we're still busy loading
 			this.innerDirectory = directory;
@@ -485,6 +482,7 @@ export default {
 			}
 
 			const itemsToDrag = this.innerValue;
+			console.log(itemsToDrag);
 			if (itemsToDrag.indexOf(item) === -1) {
 				itemsToDrag.push(item);
 			}
@@ -564,8 +562,9 @@ export default {
 						const to = Path.combine(directory, item.name, data.items[i].name);
 						try {
 							await this.machineMove({ from, to });
+							this.$makeNotification('success', `Moved ${data.items[i].name} to ${to}`);
 						} catch (e) {
-							this.$makeNotification('error', `Failed to move ${data.items[i].name} to ${directory}`, e.message);
+							this.$makeNotification('error', `Failed to move ${data.items[i].name} to ${to}`, e.message);
 							break;
 						}
 					}
@@ -693,24 +692,42 @@ export default {
 		async move(){
 			this.moveMenu.shown=true;
 			this.contextMenu.shown=false;
+			this.prevSelection = this.innerValue;
 		},
-
-		async moveHere(selectedMoveFile){ //selectedMoveFile,selectedMoveFolder
-			this.moveMenu.shown=false;
-			selectedMoveFile = this.innerValue;
-			const selectedMoveFolder = this.showDirectories[this.selectedFolder]
-			
-			if (selectedMoveFile === 'dwcFiles' && !( selectedMoveFile.isDirectory && selectedMoveFile.name === selectedMoveFolder.name)) {
-				const directory = this.innerDirectory;
-				const from = Path.combine(selectedMoveFile.directory, selectedMoveFolder.name);
-				const to = Path.combine(directory, selectedMoveFolder.name, selectedMoveFile.name);
-				try {
-					await this.machineMove({ from, to });
-				} 
-				catch (e) {
-					this.$makeNotification('error', `Failed to move ${selectedMoveFile.name} to ${directory}`, e.message);
+		async moveHere(){ //selectedMoveFile,selectedMoveFolder
+			const selectedMoveFile = this.innerValue; //files to move
+			const selectedMoveFolder = this.showDirectories[this.selectedFolder-1]; //folder destination... index is offset by 1 because of the move to "main"
+			const directory = this.innerDirectory;
+			for (let i = 0; i < selectedMoveFile.length; i++) {
+				if ((this.selectedFolder != 0) && (selectedMoveFile[i].name !== selectedMoveFolder.name)){
+					const from = Path.combine(directory, selectedMoveFile[i].name);
+					const to = Path.combine(directory, selectedMoveFolder.name, selectedMoveFile[i].name);
+					try {
+						await this.machineMove({ from, to });
+						this.$makeNotification('success', `Moved ${selectedMoveFile[i].name} to ${to}`);
+					}
+					catch (e) {
+						this.$makeNotification('error', `Failed to move ${selectedMoveFile[i].name} to ${to}`, e.message);
+						break;
+					}
+				}
+				else if(this.selectedFolder == 0){
+					const from = Path.combine(directory, selectedMoveFile[i].name);
+					const to = this.$t(this.initialDirectory) +'/'+ this.$t(selectedMoveFile[i].name);
+					try {
+						await this.machineMove({ from, to });
+						this.$makeNotification('success', `Moved ${selectedMoveFile[i].name} to ${to}`);
+					}
+					catch (e) {
+						this.$makeNotification('error', `Failed to move ${selectedMoveFile[i].name} to ${to}`, e.message);
+						break;
+					}
+				}
+				else{
+					this.$makeNotification('error', `Failed to move ${selectedMoveFile[i].name} to ${directory}`);
 				}
 			}
+			this.moveMenu.shown=false;
 		}
 	},
 	mounted() {
@@ -800,6 +817,11 @@ export default {
 		'contextMenu.shown'(to) {
 			if (!to) {
 				// Restore previously selected items
+				this.innerValue = this.prevSelection;
+			}
+		},
+		'moveMenu.shown'(to){
+			if(!to){
 				this.innerValue = this.prevSelection;
 			}
 		}

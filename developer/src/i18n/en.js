@@ -365,7 +365,8 @@ export default {
 			downloadZIP: 'Download as ZIP',
 			noFiles: 'No Files or Directories',
 			driveUnmounted: 'Drive is unmounted',
-			goUp: 'Go up'
+			goUp: 'Go up',
+			moveFile:'Please select a directory'
 		},
 		menu: {
 			noFiles: 'No Display Files'
